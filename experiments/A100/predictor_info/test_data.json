@@ -1,0 +1,118 @@
+{
+    "train": [
+        {
+            "label": "falcon-7b",
+            "size": 7,
+            "batch_size": 67,
+            "layers": 32,
+            "tokenizer_size": 2.7,
+            "time": 27.318
+        },
+        {
+            "label": "llama2-13b-hf",
+            "size": 13,
+            "batch_size": 67,
+            "layers": 40,
+            "tokenizer_size": 1.8,
+            "time": 41.138
+        },
+        {
+            "label": "llama2-7b-hf",
+            "size": 7,
+            "batch_size": 67,
+            "layers": 32,
+            "tokenizer_size": 1.8,
+            "time": 27.386
+        },
+        {
+            "label": "llama3-3b",
+            "size": 3,
+            "batch_size": 67,
+            "layers": 28,
+            "tokenizer_size": 8.7,
+            "time": 22.208
+        },
+        {
+            "label": "qwen-0.5b",
+            "size": 0.5,
+            "batch_size": 67,
+            "layers": 24,
+            "tokenizer_size": 6.8,
+            "time": 15.998
+        },
+        {
+            "label": "qwen-1.8b",
+            "size": 1.8,
+            "batch_size": 67,
+            "layers": 24,
+            "tokenizer_size": 6.8,
+            "time": 18.204
+        },
+        {
+            "label": "qwen-14b",
+            "size": 14,
+            "batch_size": 67,
+            "layers": 40,
+            "tokenizer_size": 6.8,
+            "time": 43.096
+        },
+        {
+            "label": "qwen-4b",
+            "size": 4,
+            "batch_size": 67,
+            "layers": 40,
+            "tokenizer_size": 6.8,
+            "time": 29.746
+        },
+        {
+            "label": "qwen-7b",
+            "size": 7,
+            "batch_size": 67,
+            "layers": 32,
+            "tokenizer_size": 6.7,
+            "time": 29.107
+        },
+        {
+            "label": "yi-6b",
+            "size": 6,
+            "batch_size": 67,
+            "layers": 32,
+            "tokenizer_size": 3.5,
+            "time": 26.136
+        },
+        {
+            "label": "yi-9b",
+            "size": 9,
+            "batch_size": 67,
+            "layers": 48,
+            "tokenizer_size": 3.5,
+            "time": 36.598
+        }
+    ],
+    "validation": [
+        {
+            "label": "falcon-11b",
+            "size": 11,
+            "batch_size": 67,
+            "layers": 60,
+            "tokenizer_size": 2.7,
+            "time": 44.755
+        },
+        {
+            "label": "mistral-7b",
+            "size": 7,
+            "batch_size": 67,
+            "layers": 32,
+            "tokenizer_size": 1.8,
+            "time": 29.051
+        },
+        {
+            "label": "mpt-7b",
+            "size": 7,
+            "batch_size": 67,
+            "layers": 32,
+            "tokenizer_size": 2.1,
+            "time": 25.901
+        }
+    ]
+}

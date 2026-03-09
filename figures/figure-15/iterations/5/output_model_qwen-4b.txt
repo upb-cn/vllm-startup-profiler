@@ -1,0 +1,125 @@
+DEBUG 02-12 16:50:59.256 [__init__.py:28] No plugins for group vllm.platform_plugins found.
+DEBUG 02-12 16:50:59.256 [__init__.py:34] Checking if TPU platform is available.
+DEBUG 02-12 16:50:59.256 [__init__.py:52] TPU platform is not available because: No module named 'libtpu'
+DEBUG 02-12 16:50:59.256 [__init__.py:58] Checking if CUDA platform is available.
+DEBUG 02-12 16:50:59.267 [__init__.py:78] Confirmed CUDA platform is available.
+DEBUG 02-12 16:50:59.267 [__init__.py:106] Checking if ROCm platform is available.
+DEBUG 02-12 16:50:59.267 [__init__.py:120] ROCm platform is not available because: No module named 'amdsmi'
+DEBUG 02-12 16:50:59.267 [__init__.py:127] Checking if XPU platform is available.
+DEBUG 02-12 16:50:59.267 [__init__.py:146] XPU platform is not available because: No module named 'intel_extension_for_pytorch'
+DEBUG 02-12 16:50:59.267 [__init__.py:153] Checking if CPU platform is available.
+DEBUG 02-12 16:50:59.268 [__init__.py:175] Checking if Neuron platform is available.
+DEBUG 02-12 16:50:59.268 [__init__.py:58] Checking if CUDA platform is available.
+DEBUG 02-12 16:50:59.272 [__init__.py:78] Confirmed CUDA platform is available.
+INFO 02-12 16:50:59.272 [__init__.py:241] Automatically detected platform cuda.
+DEBUG 02-12 16:51:00.697 [__init__.py:36] Available plugins for group vllm.general_plugins:
+DEBUG 02-12 16:51:00.697 [__init__.py:38] - lora_filesystem_resolver -> vllm.plugins.lora_resolvers.filesystem_resolver:register_filesystem_resolver
+DEBUG 02-12 16:51:00.697 [__init__.py:41] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 02-12 16:51:05.819 [__init__.py:711] Resolved architecture: Qwen2ForCausalLM
+INFO 02-12 16:51:05.832 [__init__.py:1750] Using max model len 32768
+INFO 02-12 16:51:05.995 [scheduler.py:222] Chunked prefill is enabled with max_num_batched_tokens=2048.
+DEBUG 02-12 16:51:05.996 [llm_engine.py:154] Enabling multiprocessing for LLMEngine.
+INFO 02-12 16:51:06.255 [llm_engine.py:95] NEW: Init Tokenizer took 0.26 seconds
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:06.275 [core.py:636] Waiting for init message from front-end.
+DEBUG 02-12 16:51:06.275 [utils.py:831] HELLO from local core engine process 0.
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:06.276 [core.py:644] Received init message: EngineHandshakeMetadata(addresses=EngineZmqAddresses(inputs=['ipc:///tmp/5c5d7a95-fdf9-4541-82dc-28232eb05ce5'], outputs=['ipc:///tmp/42039456-05a4-41b2-bd99-f51ee8231dcf'], coordinator_input=None, coordinator_output=None, frontend_stats_publish_address=None), parallel_config={'data_parallel_master_ip': '127.0.0.1', 'data_parallel_master_port': 0, 'data_parallel_size': 1})
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:06.277 [core.py:481] Has DP Coordinator: False, stats publish address: None
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:06.277 [core.py:74] Initializing a V1 LLM engine (v0.10.1.1) with config: model='./models/qwen-4b', speculative_config=None, tokenizer='./models/qwen-4b', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config={}, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=32768, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto, device_config=cuda, decoding_config=DecodingConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_backend=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=./models/qwen-4b, enable_prefix_caching=True, chunked_prefill_enabled=True, use_async_output_proc=True, pooler_config=None, compilation_config={"level":3,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":["vllm.unified_attention","vllm.unified_attention_with_output","vllm.mamba_mixer2"],"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"cudagraph_mode":1,"use_cudagraph":true,"cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"pass_config":{},"max_capture_size":256,"local_cache_dir":null}
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:07.702 [decorators.py:139] Inferred dynamic dimensions for forward method of <class 'vllm.model_executor.models.llama.LlamaModel'>: ['input_ids', 'positions', 'intermediate_tensors', 'inputs_embeds']
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:07.702 [decorators.py:139] Inferred dynamic dimensions for forward method of <class 'vllm.model_executor.models.llama_eagle3.LlamaModel'>: ['input_ids', 'positions', 'hidden_states']
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:07.843 [__init__.py:3073] Methods determine_num_available_blocks,device_config,get_cache_block_size_bytes not implemented in <vllm.v1.worker.gpu_worker.Worker object at 0x7f58aadb9510>
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:07.844 [__init__.py:3885] enabled custom ops: Counter()
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:07.844 [__init__.py:3887] disabled custom ops: Counter()
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:08.254 [parallel_state.py:976] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://131.234.187.204:41497 backend=nccl
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:08.295 [parallel_state.py:1027] Detected 1 nodes in the distributed environment
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:08.298 [parallel_state.py:1134] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:08.300 [topk_topp_sampler.py:50] Using FlashInfer for top-p & top-k sampling.
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:08.304 [__init__.py:51] No logitsprocs plugins installed (group vllm.logits_processors).
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:08.311 [__init__.py:3885] enabled custom ops: Counter()
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:08.311 [__init__.py:3887] disabled custom ops: Counter()
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:08.311 [gpu_model_runner.py:1953] Starting to load model ./models/qwen-4b...
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:08.542 [gpu_model_runner.py:1985] Loading model from scratch...
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:08.595 [cuda.py:328] Using Flash Attention backend on V1 engine.
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:08.660 [backends.py:39] Using InductorAdaptor
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:08.677 [__init__.py:3885] enabled custom ops: Counter()
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:08.677 [__init__.py:3887] disabled custom ops: Counter({'rms_norm': 81, 'column_parallel_linear': 80, 'row_parallel_linear': 80, 'silu_and_mul': 40, 'vocab_parallel_embedding': 2, 'rotary_embedding': 1})
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:08.677 [base_loader.py:48] NEW: Initializing Model took 0.14 seconds
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:08.677 [base_loader.py:50] Loading weights on cuda ...
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:08.754 [utils.py:183] Loaded weight lm_head.weight with shape torch.Size([151936, 2560])
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:09.664 [default_loader.py:262] Loading weights took 0.98 seconds
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:10.126 [gpu_model_runner.py:2007] Model loading took 7.4152 GiB and 1.125238 seconds
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:10.353 [decorators.py:237] Start compiling function <code object forward at 0x5557d18b9b80, file "/local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/models/qwen2.py", line 338>
+DEBUG 02-12 16:51:16.286 [utils.py:750] Waiting for 1 local, 0 remote core engine proc(s) to start.
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] Traced files (to be considered for compilation cache):
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/torch/_dynamo/polyfills/__init__.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/torch/nn/modules/container.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/attention/layer.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/distributed/communication_op.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/distributed/parallel_state.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/custom_op.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/activation.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/layernorm.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/linear.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/rotary_embedding/base.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/rotary_embedding/common.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/utils.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/vocab_parallel_embedding.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/models/qwen2.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:17.102 [backends.py:501] /local/huzaifa/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/platforms/interface.py
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:17.404 [backends.py:546] vLLM's torch.compile cache is disabled.
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:17.404 [backends.py:559] Dynamo bytecode transform time: 7.05 s
+DEBUG 02-12 16:51:26.296 [utils.py:750] Waiting for 1 local, 0 remote core engine proc(s) to start.
+DEBUG 02-12 16:51:36.306 [utils.py:750] Waiting for 1 local, 0 remote core engine proc(s) to start.
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:36.495 [backends.py:215] Compiling a graph for dynamic shape takes 18.76 s
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:37.334 [monitor.py:34] torch.compile takes 25.81 s in total
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:38.174 [gpu_worker.py:262] Initial free memory: 92.40 GiB; Requested memory: 0.90 (util), 83.70 GiB
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:38.174 [gpu_worker.py:269] Free memory after profiling: 84.80 GiB (total), 76.10 GiB (within requested)
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:38.174 [gpu_worker.py:275] Memory profiling takes 27.82 seconds. Total non KV cache memory: 7.78GiB; torch peak memory increase: 0.30GiB; non-torch forward increase memory: 0.07GiB; weights memory: 7.42GiB.
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:38.174 [gpu_worker.py:276] Available KV cache memory: 75.92 GiB
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:38.510 [kv_cache_utils.py:849] GPU KV cache size: 199,024 tokens
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:38.510 [kv_cache_utils.py:853] Maximum concurrency for 32,768 tokens per request: 6.07x
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:38.520 [__init__.py:3885] enabled custom ops: Counter()
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:38.520 [__init__.py:3887] disabled custom ops: Counter({'rms_norm': 81, 'column_parallel_linear': 80, 'row_parallel_linear': 80, 'silu_and_mul': 40, 'vocab_parallel_embedding': 2, 'rotary_embedding': 1})
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:38.893 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=256, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:38.923 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=248, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:38.954 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=240, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:38.982 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=232, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.014 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=224, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.045 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=216, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.077 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=208, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.108 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=200, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.141 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=192, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.168 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=184, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.202 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=176, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.235 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=168, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.268 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=160, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.302 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=152, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.336 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=144, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.369 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=136, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.404 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=128, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.436 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=120, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.472 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=112, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.507 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=104, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.540 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=96, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.575 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=88, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.610 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=80, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.644 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=72, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.676 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=64, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.706 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=56, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.740 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=48, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.772 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=40, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.804 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=32, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.836 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=24, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.868 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=16, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.897 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=8, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.920 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=4, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.945 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=2, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:39.969 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=1, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:39.987 [gpu_model_runner.py:2708] Graph capturing finished in 1.47 secs, took 0.45 GiB
+[1;36m(EngineCore_0 pid=1647362)[0;0m INFO 02-12 16:51:39.994 [core.py:214] init engine (profile, create kv cache, warmup model) took 29.87 seconds
+DEBUG 02-12 16:51:40.244 [utils.py:831] READY from local core engine process 0.
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:40.245 [core.py:728] EngineCore waiting for work.
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:40.373 [core.py:728] EngineCore waiting for work.
+[1;36m(EngineCore_0 pid=1647362)[0;0m DEBUG 02-12 16:51:40.387 [core.py:696] EngineCore exiting.
+initialize_engine took 39.69 seconds

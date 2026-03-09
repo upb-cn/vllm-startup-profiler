@@ -1,0 +1,194 @@
+{
+    "labels": [
+        "output_model_llama2-7b-hf-awq_quantization_awq.txt",
+        "output_model_llama2-7b-hf-gptq_quantization_gptq.txt",
+        "output_model_llama2-7b-hf_quantization_bitsandbytes.txt",
+        "output_model_llama2-7b-hf.txt",
+        "output_model_mistral-7b-awq_quantization_awq_dtype_float16.txt",
+        "output_model_mistral-7b-gptq_quantization_gptq_dtype_float16.txt",
+        "output_model_mistral-7b_quantization_bitsandbytes.txt",
+        "output_model_mistral-7b.txt"
+    ],
+    "data": {
+        "detect_platform": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "llm_imports": [
+            1.0,
+            1.0,
+            1.0,
+            2.0,
+            2.0,
+            2.0,
+            1.0,
+            1.0
+        ],
+        "get_model_info": [
+            5.0,
+            6.0,
+            5.0,
+            4.0,
+            5.0,
+            5.0,
+            5.0,
+            5.0
+        ],
+        "worker_init": [
+            1.0,
+            1.0,
+            1.0,
+            2.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+        ],
+        "framework_bootstrap": [
+            8.0,
+            8.0,
+            7.0,
+            8.0,
+            8.0,
+            8.0,
+            7.0,
+            7.0
+        ],
+        "load_weights": [
+            0.58,
+            0.58,
+            1.976166,
+            1.77,
+            0.74,
+            0.61,
+            2.078518,
+            1.9
+        ],
+        "model_init": [
+            0.12,
+            0.17,
+            0.56,
+            0.11,
+            0.12,
+            0.18,
+            0.56,
+            0.11
+        ],
+        "model_loading": [
+            0.707991,
+            0.7612,
+            2.536166,
+            1.884789,
+            0.873154,
+            0.883046,
+            2.638518,
+            2.01671
+        ],
+        "dynamo_transform_time": [
+            5.89,
+            5.37,
+            5.89,
+            5.14,
+            5.87,
+            5.35,
+            5.64,
+            5.14
+        ],
+        "graph_compile_general_shape": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "graph_compile_cached": [
+            4.183,
+            3.904,
+            4.693,
+            4.232,
+            4.439,
+            4.102,
+            4.247,
+            4.545
+        ],
+        "torch.compile": [
+            5.89,
+            5.37,
+            5.89,
+            5.14,
+            5.87,
+            5.35,
+            5.64,
+            5.14
+        ],
+        "kv_cache_profiling": [
+            1.6769999999999996,
+            1.7459999999999987,
+            1.777000000000001,
+            1.6780000000000008,
+            1.6609999999999996,
+            1.7479999999999993,
+            1.6829999999999998,
+            1.6550000000000011
+        ],
+        "graph_capturing": [
+            2.07,
+            1.27,
+            3.39,
+            1.09,
+            2.19,
+            1.28,
+            2.75,
+            1.16
+        ],
+        "init_engine": [
+            14.32,
+            12.75,
+            16.26,
+            12.59,
+            14.66,
+            12.95,
+            14.8,
+            12.96
+        ],
+        "tokenizer_init": [
+            0.08,
+            0.08,
+            0.08,
+            0.08,
+            0.06,
+            0.06,
+            0.06,
+            0.07
+        ],
+        "total_time": [
+            23.107991,
+            21.5912,
+            25.876165999999998,
+            22.554789,
+            23.593154,
+            21.893046,
+            24.498518,
+            22.04671
+        ],
+        "actual_total_time": [
+            24.0,
+            26.0,
+            27.0,
+            23.0,
+            24.0,
+            26.0,
+            26.0,
+            23.0
+        ]
+    }
+}

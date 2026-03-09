@@ -1,0 +1,213 @@
+{
+    "labels": [
+        "output_model_opt-6.7b_v0.10.0.txt",
+        "output_model_opt-6.7b_v0.11.0.txt",
+        "output_model_opt-6.7b_v0.3.1.txt",
+        "output_model_opt-6.7b_v0.4.0.txt",
+        "output_model_opt-6.7b_v0.5.0.txt",
+        "output_model_opt-6.7b_v0.6.0.txt",
+        "output_model_opt-6.7b_v0.7.0.txt",
+        "output_model_opt-6.7b_v0.8.0.txt",
+        "output_model_opt-6.7b_v0.9.0.txt"
+    ],
+    "data": {
+        "detect_platform": [
+            1.0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "llm_imports": [
+            1.0,
+            2.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            2.0
+        ],
+        "get_model_info": [
+            4.0,
+            4.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            5.0
+        ],
+        "worker_init": [
+            2.0,
+            1.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            1.0
+        ],
+        "framework_bootstrap": [
+            8.0,
+            7.0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8.0
+        ],
+        "load_weights": [
+            2.55,
+            4.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            2.51,
+            2.54
+        ],
+        "model_init": [
+            null,
+            0.07,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "model_loading": [
+            2.623127,
+            4.073298,
+            null,
+            null,
+            null,
+            null,
+            null,
+            0,
+            2.612247
+        ],
+        "dynamo_transform_time": [
+            2.59,
+            2.62,
+            null,
+            null,
+            null,
+            null,
+            null,
+            2.81,
+            2.62
+        ],
+        "graph_compile_general_shape": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "graph_compile_cached": [
+            2.542,
+            2.374,
+            null,
+            null,
+            null,
+            null,
+            null,
+            0,
+            3.676
+        ],
+        "torch.compile": [
+            2.59,
+            2.62,
+            null,
+            null,
+            null,
+            null,
+            null,
+            2.81,
+            2.62
+        ],
+        "kv_cache_profiling": [
+            1.8980000000000006,
+            2.176,
+            null,
+            null,
+            null,
+            null,
+            0.42,
+            null,
+            null
+        ],
+        "graph_capturing": [
+            1.0,
+            1.11,
+            2.0,
+            3.0,
+            4.0,
+            8.0,
+            11.0,
+            15.0,
+            16.0
+        ],
+        "init_engine": [
+            8.52,
+            8.75,
+            null,
+            null,
+            null,
+            null,
+            13.63,
+            24.19,
+            23.57
+        ],
+        "tokenizer_init": [
+            null,
+            0.09,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "total_time": [
+            19.143127,
+            19.913298,
+            0,
+            0,
+            0,
+            0,
+            13.63,
+            24.19,
+            34.182247000000004
+        ],
+        "actual_total_time": [
+            20.0,
+            22.0,
+            8.0,
+            8.0,
+            9.0,
+            13.0,
+            21.0,
+            34.0,
+            35.0
+        ]
+    }
+}

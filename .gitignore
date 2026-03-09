@@ -1,0 +1,79 @@
+models/
+*.pyc
+.venv/
+.venv*/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+*.venv
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Cache files
+*.cache
+*.pyo
+*.pyd
+*.pyc
+
+# Distribution / Packaging
+build/
+dist/
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# Logs and Debugging
+logs/
+*.log
+debug.log
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Testing and Coverage reports
+.coverage
+.tox/
+.nox/
+htmlcov/
+
+# Pip environment
+pip-log.txt
+pip-delete-this-directory.txt
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# PyInstaller
+*.spec
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# macOS and Linux
+.DS_Store
+*.swp
+*.swo
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Secrets & Credentials
+.env
+*.pem
+*.key
+config.json

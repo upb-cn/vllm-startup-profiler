@@ -1,0 +1,157 @@
+DEBUG 02-09 18:37:27.322 [__init__.py:28] No plugins for group vllm.platform_plugins found.
+DEBUG 02-09 18:37:27.322 [__init__.py:34] Checking if TPU platform is available.
+DEBUG 02-09 18:37:27.322 [__init__.py:52] TPU platform is not available because: No module named 'libtpu'
+DEBUG 02-09 18:37:27.322 [__init__.py:58] Checking if CUDA platform is available.
+DEBUG 02-09 18:37:27.333 [__init__.py:78] Confirmed CUDA platform is available.
+DEBUG 02-09 18:37:27.333 [__init__.py:106] Checking if ROCm platform is available.
+DEBUG 02-09 18:37:27.333 [__init__.py:120] ROCm platform is not available because: No module named 'amdsmi'
+DEBUG 02-09 18:37:27.333 [__init__.py:127] Checking if XPU platform is available.
+DEBUG 02-09 18:37:27.333 [__init__.py:146] XPU platform is not available because: No module named 'intel_extension_for_pytorch'
+DEBUG 02-09 18:37:27.333 [__init__.py:153] Checking if CPU platform is available.
+DEBUG 02-09 18:37:27.334 [__init__.py:175] Checking if Neuron platform is available.
+DEBUG 02-09 18:37:27.334 [__init__.py:58] Checking if CUDA platform is available.
+DEBUG 02-09 18:37:27.337 [__init__.py:78] Confirmed CUDA platform is available.
+INFO 02-09 18:37:27.338 [__init__.py:241] Automatically detected platform cuda.
+DEBUG 02-09 18:37:28.731 [__init__.py:36] Available plugins for group vllm.general_plugins:
+DEBUG 02-09 18:37:28.732 [__init__.py:38] - lora_filesystem_resolver -> vllm.plugins.lora_resolvers.filesystem_resolver:register_filesystem_resolver
+DEBUG 02-09 18:37:28.732 [__init__.py:41] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 02-09 18:37:33.503 [__init__.py:711] Resolved architecture: GptOssForCausalLM
+ERROR 02-09 18:37:33.504 [config.py:130] Error retrieving safetensors: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '../../models/gpt-oss-20b'. Use `repo_type` argument if needed., retrying 1 of 2
+ERROR 02-09 18:37:35.504 [config.py:128] Error retrieving safetensors: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '../../models/gpt-oss-20b'. Use `repo_type` argument if needed.
+INFO 02-09 18:37:35.521 [__init__.py:2816] Downcasting torch.float32 to torch.bfloat16.
+INFO 02-09 18:37:35.522 [__init__.py:1750] Using max model len 131072
+WARNING 02-09 18:37:36.461 [__init__.py:1171] mxfp4 quantization is not fully optimized yet. The speed can be slower than non-quantized models.
+INFO 02-09 18:37:36.556 [scheduler.py:222] Chunked prefill is enabled with max_num_batched_tokens=2048.
+DEBUG 02-09 18:37:36.573 [llm_engine.py:154] Enabling multiprocessing for LLMEngine.
+INFO 02-09 18:37:37.282 [llm_engine.py:95] NEW: Init Tokenizer took 0.71 seconds
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:37:37.305 [core.py:636] Waiting for init message from front-end.
+DEBUG 02-09 18:37:37.306 [utils.py:831] HELLO from local core engine process 0.
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:37.306 [core.py:644] Received init message: EngineHandshakeMetadata(addresses=EngineZmqAddresses(inputs=['ipc:///tmp/a4bed39c-6b25-42e4-82a1-82ee4fd17647'], outputs=['ipc:///tmp/60796890-050f-466e-8008-65609da45d32'], coordinator_input=None, coordinator_output=None, frontend_stats_publish_address=None), parallel_config={'data_parallel_master_ip': '127.0.0.1', 'data_parallel_master_port': 0, 'data_parallel_size': 1})
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:37.307 [core.py:481] Has DP Coordinator: False, stats publish address: None
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:37:37.307 [core.py:74] Initializing a V1 LLM engine (v0.10.1.1) with config: model='../../models/gpt-oss-20b', speculative_config=None, tokenizer='../../models/gpt-oss-20b', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config={}, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=131072, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=mxfp4, enforce_eager=False, kv_cache_dtype=auto, device_config=cuda, decoding_config=DecodingConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_backend='GptOss'), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=../../models/gpt-oss-20b, enable_prefix_caching=True, chunked_prefill_enabled=True, use_async_output_proc=True, pooler_config=None, compilation_config={"level":3,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":["vllm.unified_attention","vllm.unified_attention_with_output","vllm.mamba_mixer2"],"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"cudagraph_mode":1,"use_cudagraph":true,"cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"pass_config":{},"max_capture_size":256,"local_cache_dir":null}
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:37.452 [decorators.py:139] Inferred dynamic dimensions for forward method of <class 'vllm.model_executor.models.llama.LlamaModel'>: ['input_ids', 'positions', 'intermediate_tensors', 'inputs_embeds']
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:37.452 [decorators.py:139] Inferred dynamic dimensions for forward method of <class 'vllm.model_executor.models.llama_eagle3.LlamaModel'>: ['input_ids', 'positions', 'hidden_states']
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:37.629 [__init__.py:3073] Methods determine_num_available_blocks,device_config,get_cache_block_size_bytes not implemented in <vllm.v1.worker.gpu_worker.Worker object at 0x7f93fc726510>
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:37.629 [__init__.py:3885] enabled custom ops: Counter()
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:37.629 [__init__.py:3887] disabled custom ops: Counter()
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:38.082 [parallel_state.py:976] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://131.234.187.203:42017 backend=nccl
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:38.127 [parallel_state.py:1027] Detected 1 nodes in the distributed environment
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:37:38.130 [parallel_state.py:1134] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+[1;36m(EngineCore_0 pid=1012483)[0;0m WARNING 02-09 18:37:38.132 [topk_topp_sampler.py:61] FlashInfer is not available. Falling back to the PyTorch-native implementation of top-p & top-k sampling. For the best performance, please install FlashInfer.
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:38.135 [__init__.py:51] No logitsprocs plugins installed (group vllm.logits_processors).
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:38.147 [decorators.py:139] Inferred dynamic dimensions for forward method of <class 'vllm.model_executor.models.gpt_oss.GptOssModel'>: ['input_ids', 'positions']
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:38.148 [__init__.py:3885] enabled custom ops: Counter()
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:38.148 [__init__.py:3887] disabled custom ops: Counter()
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:37:38.148 [gpu_model_runner.py:1953] Starting to load model ../../models/gpt-oss-20b...
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:37:38.352 [gpu_model_runner.py:1985] Loading model from scratch...
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:37:38.449 [cuda.py:328] Using Flash Attention backend on V1 engine.
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:38.502 [backends.py:39] Using InductorAdaptor
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:38.519 [__init__.py:3885] enabled custom ops: Counter()
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:38.520 [__init__.py:3887] disabled custom ops: Counter({'rms_norm': 49, 'column_parallel_linear': 24, 'row_parallel_linear': 24, 'fused_moe': 24, 'vocab_parallel_embedding': 2, 'rotary_embedding': 1})
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:37:38.520 [base_loader.py:48] NEW: Initializing Model took 0.17 seconds
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:37:38.520 [base_loader.py:50] Loading weights on cuda ...
+DEBUG 02-09 18:37:47.316 [utils.py:750] Waiting for 1 local, 0 remote core engine proc(s) to start.
+DEBUG 02-09 18:37:57.326 [utils.py:750] Waiting for 1 local, 0 remote core engine proc(s) to start.
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:38:03.851 [default_loader.py:262] Loading weights took 25.33 seconds
+[1;36m(EngineCore_0 pid=1012483)[0;0m WARNING 02-09 18:38:03.851 [marlin_utils_fp4.py:196] Your GPU does not have native support for FP4 computation but FP4 quantization is being used. Weight-only FP4 compression will be used leveraging the Marlin kernel. This may degrade performance for compute-heavy workloads.
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:38:04.547 [gpu_model_runner.py:2007] Model loading took 13.7194 GiB and 25.796355 seconds
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:04.742 [decorators.py:237] Start compiling function <code object forward at 0x7f93fc645f70, file "/local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/models/gpt_oss.py", line 220>
+DEBUG 02-09 18:38:07.336 [utils.py:750] Waiting for 1 local, 0 remote core engine proc(s) to start.
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] Traced files (to be considered for compilation cache):
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/torch/_dynamo/polyfills/__init__.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/torch/nn/functional.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/torch/nn/modules/container.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/torch/nn/modules/linear.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/attention/layer.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/distributed/communication_op.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/distributed/parallel_state.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/custom_op.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/fused_moe/layer.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/layernorm.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/linear.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/rotary_embedding/base.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/rotary_embedding/common.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/utils.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/layers/vocab_parallel_embedding.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/model_executor/models/gpt_oss.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:08.572 [backends.py:501] /local/huzaifa/workspace/vLLM/vllm-profiling/.venv/lib/python3.11/site-packages/vllm/platforms/interface.py
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:38:09.655 [backends.py:548] Using cache directory: /local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/backbone for vLLM's torch.compile
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:38:09.656 [backends.py:559] Dynamo bytecode transform time: 4.91 s
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:10.214 [backends.py:124] Directly load the 0-th graph for dynamic shape from inductor via handle ('fuge64nazn37s4gaeb4bfhtx7ilrljqc4xeewrfgkooaky3nwphc', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/ex/cex3z2fdzqtzv44uaqbmk6ifiebklap7lgqi5dpdyrtdqg2g6dus.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:10.395 [backends.py:124] Directly load the 1-th graph for dynamic shape from inductor via handle ('f6s32ovmqignzvpvb3savdo6deciebyf376b3nyrqwxbbuuumarj', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/vd/cvdm2enubv4zxp6affxw3d362ad6mwgaayatpg2t2ofaacqmxdiv.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:10.564 [backends.py:124] Directly load the 2-th graph for dynamic shape from inductor via handle ('f24mwhbxn4bmrnd5wriedgi5acpamtz5nxevnrubboz4p3yxmho5', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/6c/c6cjiqxyic26hlfej2dbgph5ytmknstlxeus7m4jxls2mcibb673.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:10.732 [backends.py:124] Directly load the 3-th graph for dynamic shape from inductor via handle ('fws6ukb245atgxwv64a5sdabwrpl4rcfzfwaz2ee4zthmd7n25rd', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/hd/chd33ajdsfrgazctqosoomndkqrcml7bipsfy7xeghop4rsxx3t2.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:10.901 [backends.py:124] Directly load the 4-th graph for dynamic shape from inductor via handle ('fqu46wldzsc24w2nevfwbeuncf4f5bgfbzgsbvq5dqtfjeavs2gh', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/de/cdeshi67ujr2jgk64vwlvoookibgywtiffa2fhtgn2ccmyv4a7ps.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:11.070 [backends.py:124] Directly load the 5-th graph for dynamic shape from inductor via handle ('fwwlrqot65wvupxrzethpfp2geifzjad7n7m32wzzqamk32chy6x', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/cu/ccuytwu7u4rl5eds7m36bun7nhq2k6byii2jill7rgmrvcpnxvnq.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:11.239 [backends.py:124] Directly load the 6-th graph for dynamic shape from inductor via handle ('fofyzztaawlslnq43gro2nf26nieuispy7emuxsscehwguo4mhiz', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/yh/cyhvcbhfmyjownj2osj7zg3b3e7wckcvnkef2xf2fqrb43t4l64k.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:11.409 [backends.py:124] Directly load the 7-th graph for dynamic shape from inductor via handle ('f2gk4iq2gxxhlvjqv5jsxibmfeqg5jnfplqnerlprot7kye2pexl', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/2h/c2h2xrbmtj3t67jknzj27l2fqhj6occjnx6cjjsolycvb5jgghjh.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:11.578 [backends.py:124] Directly load the 8-th graph for dynamic shape from inductor via handle ('f2ncdxeqducqxjbodh6wijjou7aymazc6bz4glujkkys3c3phxvp', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/qx/cqxxbrrdp467vgjknwp5sa3wsgdiwag2wcjibpuie6a6ntwrsum4.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:11.746 [backends.py:124] Directly load the 9-th graph for dynamic shape from inductor via handle ('f72ogd4lqhci7wqb6oct5xpeen5zif4ceeswh2cgedhspeeoiqlm', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/sc/cscxxjhxpprrlv5hyxgwu2kl7me3p7rp4u6uyee4d427qjmxtkfc.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:11.916 [backends.py:124] Directly load the 10-th graph for dynamic shape from inductor via handle ('fptiyzjtefxe4zojxvi26b5u2znazceltvdzukxnsq32iqzuglhk', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/lf/clfridj6r4egc2zzf2asb4ov5km2doumfct2b46mqzcqooa73fyk.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:12.085 [backends.py:124] Directly load the 11-th graph for dynamic shape from inductor via handle ('ftuhjjhxf44b7zf3ow5sthwvh5b7yerz3lkcv5cg74ymkiudagbg', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/ow/cowecdzx6sotkyr2p2gka2mbjuxmsosl4dnkkvjeboq64mbx3z6l.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:12.254 [backends.py:124] Directly load the 12-th graph for dynamic shape from inductor via handle ('fg7xrbwje7kl2e37bablzbvrdjhvljmumqjtabolry6iubedcjoa', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/b5/cb5jj2vfitthep3w652jhf3dp4deddbayiyq6mee5553al27zrv7.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:12.422 [backends.py:124] Directly load the 13-th graph for dynamic shape from inductor via handle ('ficbr5r3sb5jkwr7yjo2kdjnxa66vluuuzxtb7nhiief52vktwlq', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/h6/ch67wccs6rukt3v5pnk4hq6fs6jaj57ewg4ydgskclha3yqvda3l.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:12.591 [backends.py:124] Directly load the 14-th graph for dynamic shape from inductor via handle ('fxat6kqsgqyrd3isphaglvkkji5nnam5ocljm6o4duhgyqhftcqa', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/jz/cjzyciyuhymh5ckz52jcv63zznvrsiorcbdmlurrwdcqasnrgown.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:12.759 [backends.py:124] Directly load the 15-th graph for dynamic shape from inductor via handle ('fquw256kn73ltv5abeka5karte7nyqlkjqsu5revsdqkjkucq7nm', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/zh/czh6asfaqagdhmmapm3f5bojzwjclvzd7uxrfcc3o5o3js75cmc7.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:12.928 [backends.py:124] Directly load the 16-th graph for dynamic shape from inductor via handle ('f22ecwpgvpm6fgsufivjuwdhemte3x3pghowvm5putq7r5vcoexk', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/c6/cc6646f6ltfagsl7vauzcn37qef34dc7d7jmcimdja7x7g6ikege.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:13.097 [backends.py:124] Directly load the 17-th graph for dynamic shape from inductor via handle ('fkjmfh4suhudlf545lik6x2fji3gpd47wc2lc4mbrutpdtvhfvqx', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/j3/cj3pcbc4f34yrox3agu22rq2x4kbuesco66xi4m4mjgra73nixzt.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:13.266 [backends.py:124] Directly load the 18-th graph for dynamic shape from inductor via handle ('fjbozsv54x4a2rzd4ecd752ff7ujr7rsxqy3d5z2zblhdwrkjayn', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/ay/caygodvgk3zayvm5tq52n7nih6jj4cujzopepta7vrp2xg7t2mnh.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:13.436 [backends.py:124] Directly load the 19-th graph for dynamic shape from inductor via handle ('f46zfhcyr5mnyum4dbg7xz3xje43zro2uefocesdyeb6yvelqwqm', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/bk/cbk4dnplwjddfc2lxk2mwnmpafoxsouqa6iwksvx62xi4crckhnk.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:13.605 [backends.py:124] Directly load the 20-th graph for dynamic shape from inductor via handle ('famayydm75omr4uttsx3bgg4tikzue22kjpwml5pvtz5rdob3x7l', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/2n/c2naxqx2goyuvs3gb7k5r3bz3emd4pnyae54e6evivt364q42ywc.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:13.774 [backends.py:124] Directly load the 21-th graph for dynamic shape from inductor via handle ('f6ypx4dap2kjgyjcqac4m42ukrwgza7ypw4u7q6pztkt2sgo76lg', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/4a/c4ajtyw7squus5s5ggly66jhwtih5tbfd7lkpw4v7u6fddpddqny.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:13.944 [backends.py:124] Directly load the 22-th graph for dynamic shape from inductor via handle ('fgwzcq34qo4bu5rfyjorb77spew2xhu72dttgtht4sttkkohrfgo', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/cl/cclkwdbjrsxb664wqijceawqwqatlcg224t7xdsz5qugopuuyp25.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:14.113 [backends.py:124] Directly load the 23-th graph for dynamic shape from inductor via handle ('funsaghihe7dooxxcdjw555qe6p4ssphiztqwk7m5dgqjlnrwnlz', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/mw/cmwdhdg7hcact3cxoywvzt2ekzxqg7auihdguzbfzmjgowgblrus.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:14.177 [backends.py:124] Directly load the 24-th graph for dynamic shape from inductor via handle ('fm4otpsiow3i5dsxjusphli5vtg4holibrqkjozqz26f2rxnkzjr', '/local/huzaifa/.cache/vllm/torch_compile_cache/9691e2ae7f/rank_0_0/inductor_cache/vu/cvuxuvbmuht6uwq5tuvvycsj4gb2ws457h34ut44fgrbrixu7gg6.py')
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:38:14.177 [backends.py:161] Directly load the compiled graph(s) for dynamic shape from the cache, took 4.044 s
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:38:14.747 [monitor.py:34] torch.compile takes 4.91 s in total
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:15.405 [gpu_worker.py:262] Initial free memory: 92.40 GiB; Requested memory: 0.90 (util), 83.70 GiB
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:15.406 [gpu_worker.py:269] Free memory after profiling: 77.82 GiB (total), 69.11 GiB (within requested)
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:15.406 [gpu_worker.py:275] Memory profiling takes 10.66 seconds. Total non KV cache memory: 14.74GiB; torch peak memory increase: 0.95GiB; non-torch forward increase memory: 0.07GiB; weights memory: 13.72GiB.
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:38:15.406 [gpu_worker.py:276] Available KV cache memory: 68.96 GiB
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:38:15.647 [kv_cache_utils.py:1013] GPU KV cache size: 1,506,496 tokens
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:38:15.647 [kv_cache_utils.py:1017] Maximum concurrency for 131,072 tokens per request: 22.61x
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:15.661 [__init__.py:3885] enabled custom ops: Counter()
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:15.661 [__init__.py:3887] disabled custom ops: Counter({'rms_norm': 49, 'column_parallel_linear': 24, 'row_parallel_linear': 24, 'fused_moe': 24, 'vocab_parallel_embedding': 2, 'rotary_embedding': 1})
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:15.937 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=256, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:15.973 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=248, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.007 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=240, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.037 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=232, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.067 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=224, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.099 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=216, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.130 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=208, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.162 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=200, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.192 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=192, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.222 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=184, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.250 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=176, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.283 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=168, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.313 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=160, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.343 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=152, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.373 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=144, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.404 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=136, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.436 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=128, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.465 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=120, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.498 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=112, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.530 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=104, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.562 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=96, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.595 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=88, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.628 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=80, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.661 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=72, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.692 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=64, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.724 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=56, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.756 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=48, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.789 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=40, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.820 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=32, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.852 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=24, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.883 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=16, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.914 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=8, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.942 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=4, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.969 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=2, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:16.997 [cuda_graph.py:134] Capturing a cudagraph on (PIECEWISE,BatchDescriptor(num_tokens=1, uniform_decode=False))
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:38:17.014 [gpu_model_runner.py:2708] Graph capturing finished in 1.35 secs, took 0.44 GiB
+[1;36m(EngineCore_0 pid=1012483)[0;0m INFO 02-09 18:38:17.025 [core.py:214] init engine (profile, create kv cache, warmup model) took 12.48 seconds
+DEBUG 02-09 18:38:17.345 [utils.py:750] Waiting for 1 local, 0 remote core engine proc(s) to start.
+DEBUG 02-09 18:38:18.016 [utils.py:831] READY from local core engine process 0.
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:18.016 [core.py:728] EngineCore waiting for work.
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:18.144 [core.py:728] EngineCore waiting for work.
+[1;36m(EngineCore_0 pid=1012483)[0;0m DEBUG 02-09 18:38:18.158 [core.py:696] EngineCore exiting.
+initialize_engine took 49.43 seconds

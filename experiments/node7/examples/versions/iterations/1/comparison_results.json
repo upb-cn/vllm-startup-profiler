@@ -1,0 +1,213 @@
+{
+    "labels": [
+        "output_model_opt-6.7b_v0.10.0.txt",
+        "output_model_opt-6.7b_v0.11.0.txt",
+        "output_model_opt-6.7b_v0.3.1.txt",
+        "output_model_opt-6.7b_v0.4.0.txt",
+        "output_model_opt-6.7b_v0.5.0.txt",
+        "output_model_opt-6.7b_v0.6.0.txt",
+        "output_model_opt-6.7b_v0.7.0.txt",
+        "output_model_opt-6.7b_v0.8.0.txt",
+        "output_model_opt-6.7b_v0.9.0.txt"
+    ],
+    "data": {
+        "detect_platform": [
+            1.0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "llm_imports": [
+            1.0,
+            1.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            3.0
+        ],
+        "get_model_info": [
+            4.0,
+            5.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            5.0
+        ],
+        "worker_init": [
+            1.0,
+            2.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            1.0
+        ],
+        "framework_bootstrap": [
+            7.0,
+            8.0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            9.0
+        ],
+        "load_weights": [
+            2.55,
+            4.23,
+            null,
+            null,
+            null,
+            null,
+            null,
+            2.54,
+            2.57
+        ],
+        "model_init": [
+            null,
+            0.07,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "model_loading": [
+            2.615056,
+            4.307058,
+            null,
+            null,
+            null,
+            null,
+            null,
+            0,
+            2.644417
+        ],
+        "dynamo_transform_time": [
+            2.61,
+            2.62,
+            null,
+            null,
+            null,
+            null,
+            null,
+            2.9,
+            2.63
+        ],
+        "graph_compile_general_shape": [
+            9.49,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            9.45,
+            9.68
+        ],
+        "graph_compile_cached": [
+            null,
+            2.378,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "torch.compile": [
+            12.1,
+            2.62,
+            null,
+            null,
+            null,
+            null,
+            null,
+            12.35,
+            12.31
+        ],
+        "kv_cache_profiling": [
+            4.700000000000001,
+            2.1819999999999995,
+            null,
+            null,
+            null,
+            null,
+            0.42,
+            null,
+            null
+        ],
+        "graph_capturing": [
+            1.0,
+            1.11,
+            2.0,
+            3.0,
+            4.0,
+            8.0,
+            11.0,
+            18.0,
+            18.0
+        ],
+        "init_engine": [
+            18.38,
+            8.74,
+            null,
+            null,
+            null,
+            null,
+            13.37,
+            38.39,
+            38.07
+        ],
+        "tokenizer_init": [
+            null,
+            0.09,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "total_time": [
+            27.995055999999998,
+            21.137058,
+            0,
+            0,
+            0,
+            0,
+            13.37,
+            38.39,
+            49.714417
+        ],
+        "actual_total_time": [
+            30.0,
+            21.0,
+            8.0,
+            8.0,
+            9.0,
+            14.0,
+            21.0,
+            48.0,
+            51.0
+        ]
+    }
+}

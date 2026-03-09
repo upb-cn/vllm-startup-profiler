@@ -1,0 +1,232 @@
+DEBUG 02-16 16:40:17.843 [__init__.py:28] No plugins for group vllm.platform_plugins found.
+DEBUG 02-16 16:40:17.843 [__init__.py:35] Checking if TPU platform is available.
+DEBUG 02-16 16:40:17.843 [__init__.py:45] TPU platform is not available because: No module named 'libtpu'
+DEBUG 02-16 16:40:17.843 [__init__.py:53] Checking if CUDA platform is available.
+DEBUG 02-16 16:40:17.856 [__init__.py:73] Confirmed CUDA platform is available.
+DEBUG 02-16 16:40:17.864 [__init__.py:101] Checking if ROCm platform is available.
+DEBUG 02-16 16:40:17.864 [__init__.py:115] ROCm platform is not available because: No module named 'amdsmi'
+DEBUG 02-16 16:40:17.864 [__init__.py:123] Checking if HPU platform is available.
+DEBUG 02-16 16:40:17.864 [__init__.py:130] HPU platform is not available because habana_frameworks is not found.
+DEBUG 02-16 16:40:17.864 [__init__.py:141] Checking if XPU platform is available.
+DEBUG 02-16 16:40:17.864 [__init__.py:151] XPU platform is not available because: No module named 'intel_extension_for_pytorch'
+DEBUG 02-16 16:40:17.864 [__init__.py:159] Checking if CPU platform is available.
+DEBUG 02-16 16:40:17.865 [__init__.py:181] Checking if Neuron platform is available.
+DEBUG 02-16 16:40:17.865 [__init__.py:188] Neuron platform is not available because: No module named 'transformers_neuronx'
+DEBUG 02-16 16:40:17.865 [__init__.py:196] Checking if OpenVINO platform is available.
+DEBUG 02-16 16:40:17.866 [__init__.py:203] OpenVINO platform is not available because vLLM is not built with OpenVINO.
+DEBUG 02-16 16:40:17.866 [__init__.py:53] Checking if CUDA platform is available.
+DEBUG 02-16 16:40:17.869 [__init__.py:73] Confirmed CUDA platform is available.
+INFO 02-16 16:40:17.877 [__init__.py:256] Automatically detected platform cuda.
+DEBUG 02-16 16:40:19.701 [__init__.py:28] No plugins for group vllm.general_plugins found.
+INFO 02-16 16:40:24.450 [config.py:583] This model supports multiple tasks: {'score', 'reward', 'generate', 'embed', 'classify'}. Defaulting to 'generate'.
+DEBUG 02-16 16:40:24.473 [arg_utils.py:1719] Setting max_num_seqs to 1024 for ENGINE_CONTEXT usage context.
+INFO 02-16 16:40:24.473 [config.py:1693] Chunked prefill is enabled with max_num_batched_tokens=2048.
+DEBUG 02-16 16:40:24.474 [llm_engine.py:133] Enabling multiprocessing for LLMEngine.
+INFO 02-16 16:40:24.609 [core.py:53] Initializing a V1 LLM engine (v0.8.0) with config: model='../../models/opt-6.7b', speculative_config=None, tokenizer='../../models/opt-6.7b', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.float16, max_seq_len=2048, download_dir=None, load_format=LoadFormat.AUTO, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto,  device_config=cuda, decoding_config=DecodingConfig(guided_decoding_backend='xgrammar', reasoning_backend=None), observability_config=ObservabilityConfig(show_hidden_metrics=False, otlp_traces_endpoint=None, collect_model_forward_time=False, collect_model_execute_time=False), seed=None, served_model_name=../../models/opt-6.7b, num_scheduler_steps=1, multi_step_stream_outputs=True, enable_prefix_caching=True, chunked_prefill_enabled=True, use_async_output_proc=True, disable_mm_preprocessor_cache=False, mm_processor_kwargs=None, pooler_config=None, compilation_config={"level":3,"custom_ops":["none"],"splitting_ops":["vllm.unified_attention","vllm.unified_attention_with_output"],"use_inductor":true,"compile_sizes":[],"use_cudagraph":true,"cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[512,504,496,488,480,472,464,456,448,440,432,424,416,408,400,392,384,376,368,360,352,344,336,328,320,312,304,296,288,280,272,264,256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"max_capture_size":512}
+WARNING 02-16 16:40:24.906 [utils.py:2282] Methods determine_num_available_blocks,device_config,get_cache_block_size_bytes,initialize_cache not implemented in <vllm.v1.worker.gpu_worker.Worker object at 0x7f83691293d0>
+DEBUG 02-16 16:40:24.906 [config.py:3658] enabled custom ops: Counter()
+DEBUG 02-16 16:40:24.906 [config.py:3660] disabled custom ops: Counter()
+DEBUG 02-16 16:40:25.286 [parallel_state.py:817] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://131.234.187.204:33479 backend=nccl
+INFO 02-16 16:40:25.332 [parallel_state.py:967] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0
+INFO 02-16 16:40:25.332 [cuda.py:215] Using Flash Attention backend on V1 engine.
+DEBUG 02-16 16:40:25.341 [config.py:3658] enabled custom ops: Counter()
+DEBUG 02-16 16:40:25.341 [config.py:3660] disabled custom ops: Counter()
+INFO 02-16 16:40:25.342 [gpu_model_runner.py:1128] Starting to load model ../../models/opt-6.7b...
+DEBUG 02-16 16:40:25.343 [decorators.py:109] Inferred dynamic dimensions for forward method of <class 'vllm.model_executor.models.opt.OPTModel'>: ['input_ids', 'positions', 'intermediate_tensors', 'inputs_embeds']
+WARNING 02-16 16:40:25.429 [topk_topp_sampler.py:63] FlashInfer is not available. Falling back to the PyTorch-native implementation of top-p & top-k sampling. For the best performance, please install FlashInfer.
+DEBUG 02-16 16:40:25.429 [config.py:3658] enabled custom ops: Counter()
+DEBUG 02-16 16:40:25.429 [config.py:3660] disabled custom ops: Counter()
+INFO 02-16 16:40:27.972 [loader.py:429] Loading weights took 2.54 seconds
+INFO 02-16 16:40:28.149 [gpu_model_runner.py:1140] Model loading took 12.4037 GB and 2.632754 seconds
+DEBUG 02-16 16:40:28.150 [decorators.py:203] Start compiling function <code object forward at 0x7f84db2c14d0, file "/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/vllm/model_executor/models/opt.py", line 304>
+DEBUG 02-16 16:40:30.788 [backends.py:370] Traced files (to be considered for compilation cache):
+DEBUG 02-16 16:40:30.788 [backends.py:370] /local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_dynamo/polyfills/builtins.py
+DEBUG 02-16 16:40:30.788 [backends.py:370] /local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/nn/modules/activation.py
+DEBUG 02-16 16:40:30.788 [backends.py:370] /local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/nn/modules/container.py
+DEBUG 02-16 16:40:30.788 [backends.py:370] /local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/nn/modules/module.py
+DEBUG 02-16 16:40:30.788 [backends.py:370] /local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/nn/modules/normalization.py
+DEBUG 02-16 16:40:30.788 [backends.py:370] /local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/nn/modules/sparse.py
+DEBUG 02-16 16:40:30.788 [backends.py:370] /local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/vllm/attention/layer.py
+DEBUG 02-16 16:40:30.788 [backends.py:370] /local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/vllm/distributed/communication_op.py
+DEBUG 02-16 16:40:30.788 [backends.py:370] /local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/vllm/distributed/parallel_state.py
+DEBUG 02-16 16:40:30.788 [backends.py:370] /local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/vllm/model_executor/layers/linear.py
+DEBUG 02-16 16:40:30.788 [backends.py:370] /local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/vllm/model_executor/layers/vocab_parallel_embedding.py
+DEBUG 02-16 16:40:30.788 [backends.py:370] /local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/vllm/model_executor/models/opt.py
+INFO 02-16 16:40:31.203 [backends.py:409] Using cache directory: /local/huzaifa/.cache/vllm/torch_compile_cache/741eab9c67/rank_0_0 for vLLM's torch.compile
+INFO 02-16 16:40:31.203 [backends.py:419] Dynamo bytecode transform time: 3.05 s
+DEBUG 02-16 16:40:31.431 [backends.py:86] Directly load the 0-th graph for shape None from inductor via handle ('fiip2uknct4gv5x5zsrfflb6pk6fmyncduzrlrgbaxby46tkxipu', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+INFO 02-16 16:40:31.431 [backends.py:115] Directly load the compiled graph for shape None from the cache
+DEBUG 02-16 16:40:31.493 [backends.py:86] Directly load the 1-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:31.554 [backends.py:86] Directly load the 2-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:31.616 [backends.py:86] Directly load the 3-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:31.678 [backends.py:86] Directly load the 4-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:31.740 [backends.py:86] Directly load the 5-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:31.801 [backends.py:86] Directly load the 6-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:31.863 [backends.py:86] Directly load the 7-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:31.925 [backends.py:86] Directly load the 8-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:31.987 [backends.py:86] Directly load the 9-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.049 [backends.py:86] Directly load the 10-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.111 [backends.py:86] Directly load the 11-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.172 [backends.py:86] Directly load the 12-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.234 [backends.py:86] Directly load the 13-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.296 [backends.py:86] Directly load the 14-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.357 [backends.py:86] Directly load the 15-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.419 [backends.py:86] Directly load the 16-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.481 [backends.py:86] Directly load the 17-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.542 [backends.py:86] Directly load the 18-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.604 [backends.py:86] Directly load the 19-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.666 [backends.py:86] Directly load the 20-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.728 [backends.py:86] Directly load the 21-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.789 [backends.py:86] Directly load the 22-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.851 [backends.py:86] Directly load the 23-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.913 [backends.py:86] Directly load the 24-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:32.974 [backends.py:86] Directly load the 25-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:33.256 [backends.py:86] Directly load the 26-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:33.318 [backends.py:86] Directly load the 27-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:33.381 [backends.py:86] Directly load the 28-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:33.443 [backends.py:86] Directly load the 29-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:33.505 [backends.py:86] Directly load the 30-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:33.568 [backends.py:86] Directly load the 31-th graph for shape None from inductor via handle ('fwnpydfqzohyf2wuk4vu35pbbhwwj7dyyrywf6exch4y25pussyn', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+DEBUG 02-16 16:40:33.623 [backends.py:86] Directly load the 32-th graph for shape None from inductor via handle ('fwm6ppjy7uvjzo7tnbpladmktsirpii35m33ukyd2ba2oruokq26', '/local/huzaifa/vllm-profiling/figures/figure-1/.venv-0.8.0/lib/python3.11/site-packages/torch/_inductor/utils.py')
+INFO 02-16 16:40:37.778 [monitor.py:33] torch.compile takes 3.05 s in total
+INFO 02-16 16:40:38.184 [kv_cache_utils.py:537] GPU KV cache size: 140,928 tokens
+INFO 02-16 16:40:38.185 [kv_cache_utils.py:540] Maximum concurrency for 2,048 tokens per request: 68.81x
+DEBUG 02-16 16:40:38.212 [backends.py:637] Warming up 1/1 for shape 512
+DEBUG 02-16 16:40:38.231 [backends.py:648] Capturing a cudagraph for shape 512
+DEBUG 02-16 16:40:38.449 [backends.py:637] Warming up 1/1 for shape 504
+DEBUG 02-16 16:40:38.466 [backends.py:648] Capturing a cudagraph for shape 504
+DEBUG 02-16 16:40:38.682 [backends.py:637] Warming up 1/1 for shape 496
+DEBUG 02-16 16:40:38.700 [backends.py:648] Capturing a cudagraph for shape 496
+DEBUG 02-16 16:40:38.916 [backends.py:637] Warming up 1/1 for shape 488
+DEBUG 02-16 16:40:38.933 [backends.py:648] Capturing a cudagraph for shape 488
+DEBUG 02-16 16:40:39.149 [backends.py:637] Warming up 1/1 for shape 480
+DEBUG 02-16 16:40:39.166 [backends.py:648] Capturing a cudagraph for shape 480
+DEBUG 02-16 16:40:39.382 [backends.py:637] Warming up 1/1 for shape 472
+DEBUG 02-16 16:40:39.399 [backends.py:648] Capturing a cudagraph for shape 472
+DEBUG 02-16 16:40:39.616 [backends.py:637] Warming up 1/1 for shape 464
+DEBUG 02-16 16:40:39.633 [backends.py:648] Capturing a cudagraph for shape 464
+DEBUG 02-16 16:40:39.849 [backends.py:637] Warming up 1/1 for shape 456
+DEBUG 02-16 16:40:39.866 [backends.py:648] Capturing a cudagraph for shape 456
+DEBUG 02-16 16:40:40.083 [backends.py:637] Warming up 1/1 for shape 448
+DEBUG 02-16 16:40:40.101 [backends.py:648] Capturing a cudagraph for shape 448
+DEBUG 02-16 16:40:40.318 [backends.py:637] Warming up 1/1 for shape 440
+DEBUG 02-16 16:40:40.336 [backends.py:648] Capturing a cudagraph for shape 440
+DEBUG 02-16 16:40:40.553 [backends.py:637] Warming up 1/1 for shape 432
+DEBUG 02-16 16:40:40.570 [backends.py:648] Capturing a cudagraph for shape 432
+DEBUG 02-16 16:40:40.788 [backends.py:637] Warming up 1/1 for shape 424
+DEBUG 02-16 16:40:40.805 [backends.py:648] Capturing a cudagraph for shape 424
+DEBUG 02-16 16:40:41.022 [backends.py:637] Warming up 1/1 for shape 416
+DEBUG 02-16 16:40:41.039 [backends.py:648] Capturing a cudagraph for shape 416
+DEBUG 02-16 16:40:41.256 [backends.py:637] Warming up 1/1 for shape 408
+DEBUG 02-16 16:40:41.273 [backends.py:648] Capturing a cudagraph for shape 408
+DEBUG 02-16 16:40:41.490 [backends.py:637] Warming up 1/1 for shape 400
+DEBUG 02-16 16:40:41.508 [backends.py:648] Capturing a cudagraph for shape 400
+DEBUG 02-16 16:40:41.725 [backends.py:637] Warming up 1/1 for shape 392
+DEBUG 02-16 16:40:41.742 [backends.py:648] Capturing a cudagraph for shape 392
+DEBUG 02-16 16:40:41.962 [backends.py:637] Warming up 1/1 for shape 384
+DEBUG 02-16 16:40:41.976 [backends.py:648] Capturing a cudagraph for shape 384
+DEBUG 02-16 16:40:42.197 [backends.py:637] Warming up 1/1 for shape 376
+DEBUG 02-16 16:40:42.211 [backends.py:648] Capturing a cudagraph for shape 376
+DEBUG 02-16 16:40:42.426 [backends.py:637] Warming up 1/1 for shape 368
+DEBUG 02-16 16:40:42.441 [backends.py:648] Capturing a cudagraph for shape 368
+DEBUG 02-16 16:40:42.656 [backends.py:637] Warming up 1/1 for shape 360
+DEBUG 02-16 16:40:42.671 [backends.py:648] Capturing a cudagraph for shape 360
+DEBUG 02-16 16:40:42.886 [backends.py:637] Warming up 1/1 for shape 352
+DEBUG 02-16 16:40:42.901 [backends.py:648] Capturing a cudagraph for shape 352
+DEBUG 02-16 16:40:43.117 [backends.py:637] Warming up 1/1 for shape 344
+DEBUG 02-16 16:40:43.131 [backends.py:648] Capturing a cudagraph for shape 344
+DEBUG 02-16 16:40:43.348 [backends.py:637] Warming up 1/1 for shape 336
+DEBUG 02-16 16:40:43.363 [backends.py:648] Capturing a cudagraph for shape 336
+DEBUG 02-16 16:40:43.579 [backends.py:637] Warming up 1/1 for shape 328
+DEBUG 02-16 16:40:43.593 [backends.py:648] Capturing a cudagraph for shape 328
+DEBUG 02-16 16:40:43.810 [backends.py:637] Warming up 1/1 for shape 320
+DEBUG 02-16 16:40:43.824 [backends.py:648] Capturing a cudagraph for shape 320
+DEBUG 02-16 16:40:44.041 [backends.py:637] Warming up 1/1 for shape 312
+DEBUG 02-16 16:40:44.054 [backends.py:648] Capturing a cudagraph for shape 312
+DEBUG 02-16 16:40:44.271 [backends.py:637] Warming up 1/1 for shape 304
+DEBUG 02-16 16:40:44.284 [backends.py:648] Capturing a cudagraph for shape 304
+DEBUG 02-16 16:40:44.501 [backends.py:637] Warming up 1/1 for shape 296
+DEBUG 02-16 16:40:44.514 [backends.py:648] Capturing a cudagraph for shape 296
+DEBUG 02-16 16:40:44.732 [backends.py:637] Warming up 1/1 for shape 288
+DEBUG 02-16 16:40:44.745 [backends.py:648] Capturing a cudagraph for shape 288
+DEBUG 02-16 16:40:44.962 [backends.py:637] Warming up 1/1 for shape 280
+DEBUG 02-16 16:40:44.975 [backends.py:648] Capturing a cudagraph for shape 280
+DEBUG 02-16 16:40:45.192 [backends.py:637] Warming up 1/1 for shape 272
+DEBUG 02-16 16:40:45.204 [backends.py:648] Capturing a cudagraph for shape 272
+DEBUG 02-16 16:40:45.421 [backends.py:637] Warming up 1/1 for shape 264
+DEBUG 02-16 16:40:45.434 [backends.py:648] Capturing a cudagraph for shape 264
+DEBUG 02-16 16:40:45.652 [backends.py:637] Warming up 1/1 for shape 256
+DEBUG 02-16 16:40:45.662 [backends.py:648] Capturing a cudagraph for shape 256
+DEBUG 02-16 16:40:45.879 [backends.py:637] Warming up 1/1 for shape 248
+DEBUG 02-16 16:40:45.889 [backends.py:648] Capturing a cudagraph for shape 248
+DEBUG 02-16 16:40:46.106 [backends.py:637] Warming up 1/1 for shape 240
+DEBUG 02-16 16:40:46.116 [backends.py:648] Capturing a cudagraph for shape 240
+DEBUG 02-16 16:40:46.333 [backends.py:637] Warming up 1/1 for shape 232
+DEBUG 02-16 16:40:46.343 [backends.py:648] Capturing a cudagraph for shape 232
+DEBUG 02-16 16:40:46.561 [backends.py:637] Warming up 1/1 for shape 224
+DEBUG 02-16 16:40:46.572 [backends.py:648] Capturing a cudagraph for shape 224
+DEBUG 02-16 16:40:46.789 [backends.py:637] Warming up 1/1 for shape 216
+DEBUG 02-16 16:40:46.800 [backends.py:648] Capturing a cudagraph for shape 216
+DEBUG 02-16 16:40:47.018 [backends.py:637] Warming up 1/1 for shape 208
+DEBUG 02-16 16:40:47.029 [backends.py:648] Capturing a cudagraph for shape 208
+DEBUG 02-16 16:40:47.247 [backends.py:637] Warming up 1/1 for shape 200
+DEBUG 02-16 16:40:47.258 [backends.py:648] Capturing a cudagraph for shape 200
+DEBUG 02-16 16:40:47.475 [backends.py:637] Warming up 1/1 for shape 192
+DEBUG 02-16 16:40:47.485 [backends.py:648] Capturing a cudagraph for shape 192
+DEBUG 02-16 16:40:47.702 [backends.py:637] Warming up 1/1 for shape 184
+DEBUG 02-16 16:40:47.711 [backends.py:648] Capturing a cudagraph for shape 184
+DEBUG 02-16 16:40:47.928 [backends.py:637] Warming up 1/1 for shape 176
+DEBUG 02-16 16:40:47.937 [backends.py:648] Capturing a cudagraph for shape 176
+DEBUG 02-16 16:40:48.155 [backends.py:637] Warming up 1/1 for shape 168
+DEBUG 02-16 16:40:48.164 [backends.py:648] Capturing a cudagraph for shape 168
+DEBUG 02-16 16:40:48.382 [backends.py:637] Warming up 1/1 for shape 160
+DEBUG 02-16 16:40:48.391 [backends.py:648] Capturing a cudagraph for shape 160
+DEBUG 02-16 16:40:48.608 [backends.py:637] Warming up 1/1 for shape 152
+DEBUG 02-16 16:40:48.617 [backends.py:648] Capturing a cudagraph for shape 152
+DEBUG 02-16 16:40:48.835 [backends.py:637] Warming up 1/1 for shape 144
+DEBUG 02-16 16:40:48.844 [backends.py:648] Capturing a cudagraph for shape 144
+DEBUG 02-16 16:40:49.062 [backends.py:637] Warming up 1/1 for shape 136
+DEBUG 02-16 16:40:49.071 [backends.py:648] Capturing a cudagraph for shape 136
+DEBUG 02-16 16:40:49.291 [backends.py:637] Warming up 1/1 for shape 128
+DEBUG 02-16 16:40:49.299 [backends.py:648] Capturing a cudagraph for shape 128
+DEBUG 02-16 16:40:49.519 [backends.py:637] Warming up 1/1 for shape 120
+DEBUG 02-16 16:40:49.526 [backends.py:648] Capturing a cudagraph for shape 120
+DEBUG 02-16 16:40:49.745 [backends.py:637] Warming up 1/1 for shape 112
+DEBUG 02-16 16:40:49.752 [backends.py:648] Capturing a cudagraph for shape 112
+DEBUG 02-16 16:40:49.971 [backends.py:637] Warming up 1/1 for shape 104
+DEBUG 02-16 16:40:49.978 [backends.py:648] Capturing a cudagraph for shape 104
+DEBUG 02-16 16:40:50.197 [backends.py:637] Warming up 1/1 for shape 96
+DEBUG 02-16 16:40:50.205 [backends.py:648] Capturing a cudagraph for shape 96
+DEBUG 02-16 16:40:50.425 [backends.py:637] Warming up 1/1 for shape 88
+DEBUG 02-16 16:40:50.432 [backends.py:648] Capturing a cudagraph for shape 88
+DEBUG 02-16 16:40:50.650 [backends.py:637] Warming up 1/1 for shape 80
+DEBUG 02-16 16:40:50.658 [backends.py:648] Capturing a cudagraph for shape 80
+DEBUG 02-16 16:40:50.877 [backends.py:637] Warming up 1/1 for shape 72
+DEBUG 02-16 16:40:50.884 [backends.py:648] Capturing a cudagraph for shape 72
+DEBUG 02-16 16:40:51.105 [backends.py:637] Warming up 1/1 for shape 64
+DEBUG 02-16 16:40:51.112 [backends.py:648] Capturing a cudagraph for shape 64
+DEBUG 02-16 16:40:51.332 [backends.py:637] Warming up 1/1 for shape 56
+DEBUG 02-16 16:40:51.339 [backends.py:648] Capturing a cudagraph for shape 56
+DEBUG 02-16 16:40:51.559 [backends.py:637] Warming up 1/1 for shape 48
+DEBUG 02-16 16:40:51.566 [backends.py:648] Capturing a cudagraph for shape 48
+DEBUG 02-16 16:40:51.789 [backends.py:637] Warming up 1/1 for shape 40
+DEBUG 02-16 16:40:51.796 [backends.py:648] Capturing a cudagraph for shape 40
+DEBUG 02-16 16:40:52.017 [backends.py:637] Warming up 1/1 for shape 32
+DEBUG 02-16 16:40:52.030 [backends.py:648] Capturing a cudagraph for shape 32
+DEBUG 02-16 16:40:52.257 [backends.py:637] Warming up 1/1 for shape 24
+DEBUG 02-16 16:40:52.268 [backends.py:648] Capturing a cudagraph for shape 24
+DEBUG 02-16 16:40:52.491 [backends.py:637] Warming up 1/1 for shape 16
+DEBUG 02-16 16:40:52.506 [backends.py:648] Capturing a cudagraph for shape 16
+DEBUG 02-16 16:40:52.730 [backends.py:637] Warming up 1/1 for shape 8
+DEBUG 02-16 16:40:52.736 [backends.py:648] Capturing a cudagraph for shape 8
+DEBUG 02-16 16:40:52.959 [backends.py:637] Warming up 1/1 for shape 4
+DEBUG 02-16 16:40:52.964 [backends.py:648] Capturing a cudagraph for shape 4
+DEBUG 02-16 16:40:53.186 [backends.py:637] Warming up 1/1 for shape 2
+DEBUG 02-16 16:40:53.191 [backends.py:648] Capturing a cudagraph for shape 2
+DEBUG 02-16 16:40:53.413 [backends.py:637] Warming up 1/1 for shape 1
+DEBUG 02-16 16:40:53.419 [backends.py:648] Capturing a cudagraph for shape 1
+INFO 02-16 16:40:53.639 [gpu_model_runner.py:1436] Graph capturing finished in 15 secs, took 0.49 GiB
+INFO 02-16 16:40:53.670 [core.py:138] init engine (profile, create kv cache, warmup model) took 25.52 seconds
+DEBUG 02-16 16:40:53.676 [core.py:357] EngineCore busy loop waiting.
+DEBUG 02-16 16:40:53.684 [core.py:336] EngineCore interrupted.
+initialize_engine took 33.98 seconds

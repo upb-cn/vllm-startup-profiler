@@ -1,0 +1,17 @@
+DEBUG 10-09 14:43:32 [__init__.py:28] No plugins for group vllm.platform_plugins found.
+DEBUG 10-09 14:43:32 [__init__.py:34] Checking if TPU platform is available.
+DEBUG 10-09 14:43:32 [__init__.py:52] TPU platform is not available because: No module named 'libtpu'
+DEBUG 10-09 14:43:32 [__init__.py:58] Checking if CUDA platform is available.
+DEBUG 10-09 14:43:33 [__init__.py:78] Confirmed CUDA platform is available.
+DEBUG 10-09 14:43:33 [__init__.py:106] Checking if ROCm platform is available.
+DEBUG 10-09 14:43:33 [__init__.py:120] ROCm platform is not available because: No module named 'amdsmi'
+DEBUG 10-09 14:43:33 [__init__.py:127] Checking if XPU platform is available.
+DEBUG 10-09 14:43:33 [__init__.py:146] XPU platform is not available because: No module named 'intel_extension_for_pytorch'
+DEBUG 10-09 14:43:33 [__init__.py:153] Checking if CPU platform is available.
+DEBUG 10-09 14:43:33 [__init__.py:175] Checking if Neuron platform is available.
+DEBUG 10-09 14:43:33 [__init__.py:58] Checking if CUDA platform is available.
+DEBUG 10-09 14:43:33 [__init__.py:78] Confirmed CUDA platform is available.
+INFO 10-09 14:43:33 [__init__.py:241] Automatically detected platform cuda.
+DEBUG 10-09 14:43:34 [__init__.py:36] Available plugins for group vllm.general_plugins:
+DEBUG 10-09 14:43:34 [__init__.py:38] - lora_filesystem_resolver -> vllm.plugins.lora_resolvers.filesystem_resolver:register_filesystem_resolver
+DEBUG 10-09 14:43:34 [__init__.py:41] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.

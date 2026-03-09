@@ -1,0 +1,61 @@
+{
+    "labels": [
+        "output_model_llama3-3b.txt"
+    ],
+    "data": {
+        "detect_platform": [
+            0.015
+        ],
+        "llm_imports": [
+            1.382
+        ],
+        "get_model_info": [
+            4.828
+        ],
+        "worker_init": [
+            1.732
+        ],
+        "framework_bootstrap": [
+            7.957
+        ],
+        "load_weights": [
+            0.78
+        ],
+        "model_init": [
+            0.14
+        ],
+        "model_loading": [
+            0.919038
+        ],
+        "dynamo_transform_time": [
+            4.82
+        ],
+        "graph_compile_general_shape": [
+            null
+        ],
+        "graph_compile_cached": [
+            4.238
+        ],
+        "torch.compile": [
+            4.82
+        ],
+        "kv_cache_profiling": [
+            1.6820000000000004
+        ],
+        "graph_capturing": [
+            1.04
+        ],
+        "init_engine": [
+            12.23
+        ],
+        "tokenizer_init": [
+            0.29
+        ],
+        "total_time": [
+            21.396037999999997
+        ],
+        "actual_total_time": [
+            22.444
+        ]
+    }
+}

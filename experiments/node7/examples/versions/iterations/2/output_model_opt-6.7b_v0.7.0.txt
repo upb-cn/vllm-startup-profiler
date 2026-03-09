@@ -1,0 +1,21 @@
+DEBUG 09-25 16:28:54 __init__.py:26] No plugins for group vllm.platform_plugins found.
+INFO 09-25 16:28:54 __init__.py:183] Automatically detected platform cuda.
+DEBUG 09-25 16:28:54 __init__.py:26] No plugins for group vllm.general_plugins found.
+INFO 09-25 16:28:58 config.py:520] This model supports multiple tasks: {'reward', 'score', 'generate', 'classify', 'embed'}. Defaulting to 'generate'.
+INFO 09-25 16:28:58 llm_engine.py:232] Initializing an LLM engine (v0.7.0) with config: model='/local/huzaifa/workspace/models/opt-6.7b', speculative_config=None, tokenizer='/local/huzaifa/workspace/models/opt-6.7b', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.float16, max_seq_len=2048, download_dir=None, load_format=LoadFormat.AUTO, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto,  device_config=cuda, decoding_config=DecodingConfig(guided_decoding_backend='xgrammar'), observability_config=ObservabilityConfig(otlp_traces_endpoint=None, collect_model_forward_time=False, collect_model_execute_time=False), seed=0, served_model_name=/local/huzaifa/workspace/models/opt-6.7b, num_scheduler_steps=1, multi_step_stream_outputs=True, enable_prefix_caching=False, chunked_prefill_enabled=False, use_async_output_proc=True, disable_mm_preprocessor_cache=False, mm_processor_kwargs=None, pooler_config=None, compilation_config={"splitting_ops":[],"compile_sizes":[],"cudagraph_capture_sizes":[256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"max_capture_size":256}, use_cached_outputs=False, 
+INFO 09-25 16:28:59 cuda.py:225] Using Flash Attention backend.
+DEBUG 09-25 16:28:59 parallel_state.py:951] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://131.234.187.203:47877 backend=nccl
+INFO 09-25 16:28:59 model_runner.py:1110] Starting to load model /local/huzaifa/workspace/models/opt-6.7b...
+DEBUG 09-25 16:28:59 decorators.py:107] Inferred dynamic dimensions for forward method of <class 'vllm.model_executor.models.opt.OPTModel'>: ['input_ids', 'positions', 'intermediate_tensors', 'inputs_embeds']
+DEBUG 09-25 16:28:59 config.py:3329] enabled custom ops: Counter()
+DEBUG 09-25 16:28:59 config.py:3331] disabled custom ops: Counter()
+INFO 09-25 16:29:02 model_runner.py:1115] Loading model weights took 12.4037 GB
+INFO 09-25 16:29:02 worker.py:266] Memory profiling takes 0.42 seconds
+INFO 09-25 16:29:02 worker.py:266] the current vLLM instance can use total_gpu_memory (93.09GiB) x gpu_memory_utilization (0.90) = 83.78GiB
+INFO 09-25 16:29:02 worker.py:266] model weights take 12.40GiB; non_torch_memory takes 0.16GiB; PyTorch activation peak memory takes 0.50GiB; the rest of the memory reserved for KV Cache is 70.71GiB.
+INFO 09-25 16:29:02 executor_base.py:108] # CUDA blocks: 9051, # CPU blocks: 512
+INFO 09-25 16:29:02 executor_base.py:113] Maximum concurrency for 2048 tokens per request: 70.71x
+INFO 09-25 16:29:04 model_runner.py:1430] Capturing cudagraphs for decoding. This may lead to unexpected consequences if the model is not static. To run the model in eager mode, set 'enforce_eager=True' or use '--enforce-eager' in the CLI. If out-of-memory error occurs during cudagraph capture, consider decreasing `gpu_memory_utilization` or switching to eager mode. You can also reduce the `max_num_seqs` as needed to decrease memory usage.
+INFO 09-25 16:29:15 model_runner.py:1558] Graph capturing finished in 11 secs, took 0.19 GiB
+INFO 09-25 16:29:15 llm_engine.py:429] init engine (profile, create kv cache, warmup model) took 13.40 seconds
+initialize_engine took 20.91 seconds

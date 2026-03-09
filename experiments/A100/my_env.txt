@@ -1,0 +1,166 @@
+Collecting environment information...
+==============================
+        System Info
+==============================
+OS                           : Ubuntu 22.04.5 LTS (x86_64)
+GCC version                  : (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+Clang version                : Could not collect
+CMake version                : version 4.0.0
+Libc version                 : glibc-2.35
+
+==============================
+       PyTorch Info
+==============================
+PyTorch version              : 2.7.0+cu126
+Is debug build               : False
+CUDA used to build PyTorch   : 12.6
+ROCM used to build PyTorch   : N/A
+
+==============================
+      Python Environment
+==============================
+Python version               : 3.11.12 | packaged by conda-forge | (main, Apr 10 2025, 22:23:25) [GCC 13.3.0] (64-bit runtime)
+Python platform              : Linux-6.8.0-60-generic-x86_64-with-glibc2.35
+
+==============================
+       CUDA / GPU Info
+==============================
+Is CUDA available            : True
+CUDA runtime version         : 12.6.85
+CUDA_MODULE_LOADING set to   : LAZY
+GPU models and configuration : GPU 0: NVIDIA A100-PCIE-40GB
+Nvidia driver version        : 575.57.08
+cuDNN version                : Could not collect
+HIP runtime version          : N/A
+MIOpen runtime version       : N/A
+Is XNNPACK available         : True
+
+==============================
+          CPU Info
+==============================
+Architecture:                         x86_64
+CPU op-mode(s):                       32-bit, 64-bit
+Address sizes:                        40 bits physical, 48 bits virtual
+Byte Order:                           Little Endian
+CPU(s):                               14
+On-line CPU(s) list:                  0-13
+Vendor ID:                            AuthenticAMD
+Model name:                           AMD EPYC Processor
+CPU family:                           23
+Model:                                1
+Thread(s) per core:                   1
+Core(s) per socket:                   1
+Socket(s):                            14
+Stepping:                             2
+BogoMIPS:                             5589.49
+Flags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 arat npt nrip_save
+Virtualization:                       AMD-V
+Hypervisor vendor:                    KVM
+Virtualization type:                  full
+L1d cache:                            448 KiB (14 instances)
+L1i cache:                            896 KiB (14 instances)
+L2 cache:                             7 MiB (14 instances)
+L3 cache:                             112 MiB (14 instances)
+NUMA node(s):                         1
+NUMA node0 CPU(s):                    0-13
+Vulnerability Gather data sampling:   Not affected
+Vulnerability Itlb multihit:          Not affected
+Vulnerability L1tf:                   Not affected
+Vulnerability Mds:                    Not affected
+Vulnerability Meltdown:               Not affected
+Vulnerability Mmio stale data:        Not affected
+Vulnerability Reg file data sampling: Not affected
+Vulnerability Retbleed:               Mitigation; untrained return thunk; SMT disabled
+Vulnerability Spec rstack overflow:   Vulnerable: Safe RET, no microcode
+Vulnerability Spec store bypass:      Vulnerable
+Vulnerability Spectre v1:             Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:             Mitigation; Retpolines; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerability Srbds:                  Not affected
+Vulnerability Tsx async abort:        Not affected
+
+==============================
+Versions of relevant libraries
+==============================
+[pip3] numpy==2.2.5
+[pip3] nvidia-cublas-cu12==12.6.4.1
+[pip3] nvidia-cuda-cupti-cu12==12.6.80
+[pip3] nvidia-cuda-nvrtc-cu12==12.6.77
+[pip3] nvidia-cuda-runtime-cu12==12.6.77
+[pip3] nvidia-cudnn-cu12==9.5.1.17
+[pip3] nvidia-cufft-cu12==11.3.0.4
+[pip3] nvidia-cufile-cu12==1.11.1.6
+[pip3] nvidia-curand-cu12==10.3.7.77
+[pip3] nvidia-cusolver-cu12==11.7.1.2
+[pip3] nvidia-cusparse-cu12==12.5.4.2
+[pip3] nvidia-cusparselt-cu12==0.6.3
+[pip3] nvidia-nccl-cu12==2.26.2
+[pip3] nvidia-nvjitlink-cu12==12.6.85
+[pip3] nvidia-nvtx-cu12==12.6.77
+[pip3] optree==0.15.0
+[pip3] pyzmq==27.0.0
+[pip3] torch==2.7.0+cu126
+[pip3] torchaudio==2.7.0+cu126
+[pip3] torchelastic==0.2.2
+[pip3] torchvision==0.22.0+cu126
+[pip3] transformers==4.53.1
+[pip3] triton==3.3.0
+[conda] numpy                     2.2.5           py311h5d046bc_0    conda-forge
+[conda] nvidia-cublas-cu12        12.6.4.1                 pypi_0    pypi
+[conda] nvidia-cuda-cupti-cu12    12.6.80                  pypi_0    pypi
+[conda] nvidia-cuda-nvrtc-cu12    12.6.77                  pypi_0    pypi
+[conda] nvidia-cuda-runtime-cu12  12.6.77                  pypi_0    pypi
+[conda] nvidia-cudnn-cu12         9.5.1.17                 pypi_0    pypi
+[conda] nvidia-cufft-cu12         11.3.0.4                 pypi_0    pypi
+[conda] nvidia-cufile-cu12        1.11.1.6                 pypi_0    pypi
+[conda] nvidia-curand-cu12        10.3.7.77                pypi_0    pypi
+[conda] nvidia-cusolver-cu12      11.7.1.2                 pypi_0    pypi
+[conda] nvidia-cusparse-cu12      12.5.4.2                 pypi_0    pypi
+[conda] nvidia-cusparselt-cu12    0.6.3                    pypi_0    pypi
+[conda] nvidia-nccl-cu12          2.26.2                   pypi_0    pypi
+[conda] nvidia-nvjitlink-cu12     12.6.85                  pypi_0    pypi
+[conda] nvidia-nvtx-cu12          12.6.77                  pypi_0    pypi
+[conda] optree                    0.15.0                   pypi_0    pypi
+[conda] torch                     2.7.0+cu126              pypi_0    pypi
+[conda] torchaudio                2.7.0+cu126              pypi_0    pypi
+[conda] torchelastic              0.2.2                    pypi_0    pypi
+[conda] torchvision               0.22.0+cu126             pypi_0    pypi
+[conda] triton                    3.3.0                    pypi_0    pypi
+
+==============================
+         vLLM Info
+==============================
+ROCM Version                 : Could not collect
+Neuron SDK Version           : N/A
+vLLM Version                 : 0.9.2
+vLLM Build Flags:
+  CUDA Archs: Not Set; ROCm: Disabled; Neuron: Disabled
+GPU Topology:
+  	�[4mGPU0	CPU Affinity	NUMA Affinity	GPU NUMA ID�[0m
+GPU0	 X 	0-13	0		N/A
+
+Legend:
+
+  X    = Self
+  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)
+  PIX  = Connection traversing at most a single PCIe bridge
+  NV#  = Connection traversing a bonded set of # NVLinks
+
+==============================
+     Environment Variables
+==============================
+NVIDIA_VISIBLE_DEVICES=all
+NVIDIA_REQUIRE_CUDA=cuda>=12.6 brand=unknown,driver>=470,driver<471 brand=grid,driver>=470,driver<471 brand=tesla,driver>=470,driver<471 brand=nvidia,driver>=470,driver<471 brand=quadro,driver>=470,driver<471 brand=quadrortx,driver>=470,driver<471 brand=nvidiartx,driver>=470,driver<471 brand=vapps,driver>=470,driver<471 brand=vpc,driver>=470,driver<471 brand=vcs,driver>=470,driver<471 brand=vws,driver>=470,driver<471 brand=cloudgaming,driver>=470,driver<471 brand=unknown,driver>=535,driver<536 brand=grid,driver>=535,driver<536 brand=tesla,driver>=535,driver<536 brand=nvidia,driver>=535,driver<536 brand=quadro,driver>=535,driver<536 brand=quadrortx,driver>=535,driver<536 brand=nvidiartx,driver>=535,driver<536 brand=vapps,driver>=535,driver<536 brand=vpc,driver>=535,driver<536 brand=vcs,driver>=535,driver<536 brand=vws,driver>=535,driver<536 brand=cloudgaming,driver>=535,driver<536 brand=unknown,driver>=550,driver<551 brand=grid,driver>=550,driver<551 brand=tesla,driver>=550,driver<551 brand=nvidia,driver>=550,driver<551 brand=quadro,driver>=550,driver<551 brand=quadrortx,driver>=550,driver<551 brand=nvidiartx,driver>=550,driver<551 brand=vapps,driver>=550,driver<551 brand=vpc,driver>=550,driver<551 brand=vcs,driver>=550,driver<551 brand=vws,driver>=550,driver<551 brand=cloudgaming,driver>=550,driver<551
+NCCL_VERSION=2.23.4-1
+NVIDIA_DRIVER_CAPABILITIES=compute,utility
+NVIDIA_PRODUCT_NAME=CUDA
+CUDA_VERSION=12.6.3
+PYTORCH_VERSION=2.7.0
+LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
+NCCL_CUMEM_ENABLE=0
+PYTORCH_NVML_BASED_CUDA_CHECK=1
+TORCHINDUCTOR_COMPILE_THREADS=1
+CUDA_MODULE_LOADING=LAZY
+

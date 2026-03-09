@@ -1,0 +1,213 @@
+{
+    "labels": [
+        "output_model_opt-6.7b_v0.10.0.txt",
+        "output_model_opt-6.7b_v0.11.0.txt",
+        "output_model_opt-6.7b_v0.3.1.txt",
+        "output_model_opt-6.7b_v0.4.0.txt",
+        "output_model_opt-6.7b_v0.5.0.txt",
+        "output_model_opt-6.7b_v0.6.0.txt",
+        "output_model_opt-6.7b_v0.7.0.txt",
+        "output_model_opt-6.7b_v0.8.0.txt",
+        "output_model_opt-6.7b_v0.9.0.txt"
+    ],
+    "data": {
+        "detect_platform": [
+            0.0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "llm_imports": [
+            1.0,
+            1.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            3.0
+        ],
+        "get_model_info": [
+            5.0,
+            5.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            5.0
+        ],
+        "worker_init": [
+            1.0,
+            2.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            1.0
+        ],
+        "framework_bootstrap": [
+            7.0,
+            8.0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            9.0
+        ],
+        "load_weights": [
+            2.56,
+            4.08,
+            null,
+            null,
+            null,
+            null,
+            null,
+            2.52,
+            2.6
+        ],
+        "model_init": [
+            null,
+            0.07,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "model_loading": [
+            2.633179,
+            4.152895,
+            null,
+            null,
+            null,
+            null,
+            null,
+            0,
+            2.671364
+        ],
+        "dynamo_transform_time": [
+            2.62,
+            2.61,
+            null,
+            null,
+            null,
+            null,
+            null,
+            2.83,
+            2.63
+        ],
+        "graph_compile_general_shape": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "graph_compile_cached": [
+            2.551,
+            2.362,
+            null,
+            null,
+            null,
+            null,
+            null,
+            0,
+            3.714
+        ],
+        "torch.compile": [
+            2.62,
+            2.61,
+            null,
+            null,
+            null,
+            null,
+            null,
+            2.83,
+            2.63
+        ],
+        "kv_cache_profiling": [
+            1.899,
+            2.178000000000001,
+            null,
+            null,
+            null,
+            null,
+            0.42,
+            null,
+            null
+        ],
+        "graph_capturing": [
+            1.0,
+            1.1,
+            2.0,
+            3.0,
+            4.0,
+            8.0,
+            11.0,
+            15.0,
+            15.0
+        ],
+        "init_engine": [
+            8.57,
+            8.7,
+            null,
+            null,
+            null,
+            null,
+            13.4,
+            24.2,
+            23.37
+        ],
+        "tokenizer_init": [
+            null,
+            0.09,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "total_time": [
+            18.203179,
+            20.942895,
+            0,
+            0,
+            0,
+            0,
+            13.4,
+            24.2,
+            35.041364
+        ],
+        "actual_total_time": [
+            19.0,
+            22.0,
+            8.0,
+            8.0,
+            9.0,
+            13.0,
+            21.0,
+            33.0,
+            36.0
+        ]
+    }
+}

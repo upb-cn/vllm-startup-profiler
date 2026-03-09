@@ -1,0 +1,194 @@
+{
+    "labels": [
+        "output_model_llama3-3b_max-model-len_16k.txt",
+        "output_model_llama3-3b_max-model-len_32k.txt",
+        "output_model_llama3-3b_max-model-len_64k.txt",
+        "output_model_llama3-3b_max-seq-len-to-capture_1024.txt",
+        "output_model_llama3-3b_max-seq-len-to-capture_2048.txt",
+        "output_model_llama3-3b_max-seq-len-to-capture_4096.txt",
+        "output_model_llama3-3b_offline_serving.txt",
+        "output_model_llama3-3b_online-serving.txt"
+    ],
+    "data": {
+        "detect_platform": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+        ],
+        "llm_imports": [
+            1.0,
+            1.0,
+            1.0,
+            2.0,
+            2.0,
+            1.0,
+            2.0,
+            1.0
+        ],
+        "get_model_info": [
+            5.0,
+            5.0,
+            5.0,
+            4.0,
+            5.0,
+            5.0,
+            5.0,
+            5.0
+        ],
+        "worker_init": [
+            2.0,
+            2.0,
+            1.0,
+            1.0,
+            1.0,
+            2.0,
+            2.0,
+            1.0
+        ],
+        "framework_bootstrap": [
+            8.0,
+            8.0,
+            7.0,
+            7.0,
+            8.0,
+            8.0,
+            9.0,
+            8.0
+        ],
+        "load_weights": [
+            0.87,
+            0.87,
+            0.87,
+            0.87,
+            0.87,
+            0.87,
+            0.87,
+            0.87
+        ],
+        "model_init": [
+            0.13,
+            0.13,
+            0.13,
+            0.13,
+            0.13,
+            0.13,
+            0.13,
+            0.13
+        ],
+        "model_loading": [
+            1.002973,
+            1.005889,
+            1.00682,
+            1.002673,
+            1.005523,
+            1.005698,
+            1.002962,
+            1.004791
+        ],
+        "dynamo_transform_time": [
+            4.58,
+            4.53,
+            4.57,
+            4.59,
+            4.57,
+            4.62,
+            4.63,
+            4.48
+        ],
+        "graph_compile_general_shape": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "graph_compile_cached": [
+            3.919,
+            3.904,
+            3.975,
+            3.942,
+            3.921,
+            3.929,
+            3.941,
+            2.993
+        ],
+        "torch.compile": [
+            4.58,
+            4.53,
+            4.57,
+            4.59,
+            4.57,
+            4.62,
+            4.63,
+            4.48
+        ],
+        "kv_cache_profiling": [
+            1.5909999999999993,
+            1.5859999999999985,
+            1.5850000000000009,
+            1.5779999999999994,
+            1.5790000000000006,
+            1.5810000000000013,
+            1.5790000000000006,
+            1.657
+        ],
+        "graph_capturing": [
+            1.02,
+            1.02,
+            1.03,
+            1.02,
+            1.02,
+            1.02,
+            1.02,
+            1.04
+        ],
+        "init_engine": [
+            11.58,
+            11.51,
+            11.63,
+            11.59,
+            11.56,
+            11.62,
+            11.64,
+            10.66
+        ],
+        "tokenizer_init": [
+            0.29,
+            0.29,
+            0.29,
+            0.44,
+            0.29,
+            0.29,
+            0.29,
+            0.29
+        ],
+        "total_time": [
+            20.872973,
+            20.805889,
+            19.92682,
+            20.032673,
+            20.855522999999998,
+            20.915698,
+            21.932962,
+            19.954791
+        ],
+        "actual_total_time": [
+            21.0,
+            22.0,
+            22.0,
+            22.0,
+            22.0,
+            21.0,
+            22.0,
+            21.0
+        ]
+    }
+}

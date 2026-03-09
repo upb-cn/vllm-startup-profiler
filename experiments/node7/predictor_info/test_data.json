@@ -1,0 +1,132 @@
+{
+    "train": [
+        {
+            "label": "falcon-7b",
+            "size": 7,
+            "batch_size": 67,
+            "layers": 32,
+            "tokenizer_size": 2.7,
+            "compiled_graph_sizes": 905,
+            "time": 24.322
+        },
+        {
+            "label": "llama2-13b-hf",
+            "size": 13,
+            "batch_size": 67,
+            "layers": 40,
+            "tokenizer_size": 1.8,
+            "compiled_graph_sizes": 1253,
+            "time": 29.202
+        },
+        {
+            "label": "llama2-7b-hf",
+            "size": 7,
+            "batch_size": 67,
+            "layers": 32,
+            "tokenizer_size": 1.8,
+            "compiled_graph_sizes": 995,
+            "time": 25.686
+        },
+        {
+            "label": "qwen-0.5b",
+            "size": 0.5,
+            "batch_size": 67,
+            "layers": 24,
+            "tokenizer_size": 6.8,
+            "compiled_graph_sizes": 695,
+            "time": 19.558
+        },
+        {
+            "label": "qwen-1.8b",
+            "size": 1.8,
+            "batch_size": 67,
+            "layers": 24,
+            "tokenizer_size": 6.8,
+            "compiled_graph_sizes": 747,
+            "time": 19.951
+        },
+        {
+            "label": "qwen-14b",
+            "size": 14,
+            "batch_size": 67,
+            "layers": 40,
+            "tokenizer_size": 6.8,
+            "compiled_graph_sizes": 1262,
+            "time": 33.859
+        },
+        {
+            "label": "qwen-4b",
+            "size": 4,
+            "batch_size": 67,
+            "layers": 40,
+            "tokenizer_size": 6.8,
+            "compiled_graph_sizes": 1261,
+            "time": 25.975
+        },
+        {
+            "label": "yi-6b",
+            "size": 6,
+            "batch_size": 67,
+            "layers": 32,
+            "tokenizer_size": 3.5,
+            "compiled_graph_sizes": 1120,
+            "time": 23.877
+        },
+        {
+            "label": "yi-9b",
+            "size": 9,
+            "batch_size": 67,
+            "layers": 48,
+            "tokenizer_size": 3.5,
+            "compiled_graph_sizes": 1693,
+            "time": 30.962
+        }
+    ],
+    "validation": [
+        {
+            "label": "falcon-11b",
+            "size": 11,
+            "batch_size": 67,
+            "layers": 60,
+            "tokenizer_size": 2.7,
+            "compiled_graph_sizes": 1716,
+            "time": 33.011
+        },
+        {
+            "label": "mistral-7b",
+            "size": 7,
+            "batch_size": 67,
+            "layers": 32,
+            "tokenizer_size": 1.8,
+            "compiled_graph_sizes": 1120,
+            "time": 23.652
+        },
+        {
+            "label": "gemma-7b",
+            "size": 7,
+            "batch_size": 67,
+            "layers": 28,
+            "tokenizer_size": 17.5,
+            "compiled_graph_sizes": 704,
+            "time": 23.742
+        },
+        {
+            "label": "llama3-3b",
+            "size": 3,
+            "batch_size": 67,
+            "layers": 28,
+            "tokenizer_size": 8.7,
+            "compiled_graph_sizes": 979,
+            "time": 23.624
+        },
+        {
+            "label": "qwen-7b",
+            "size": 7,
+            "batch_size": 67,
+            "layers": 32,
+            "tokenizer_size": 6.8,
+            "compiled_graph_sizes": 1002,
+            "time": 24.738
+        }
+    ]
+}

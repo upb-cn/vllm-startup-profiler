@@ -1,0 +1,74 @@
+{
+    "labels": [
+        "output_model_mistral-7b.txt",
+        "output_model_mpt-7b.txt",
+        "output_model_falcon-11b.txt"
+    ],
+    "data": {
+        "load_weights": [
+            2.0,
+            3.29,
+            3.42
+        ],
+        "model_init": [
+            0.12,
+            0.1,
+            0.14
+        ],
+        "model_loading": [
+            2.121091,
+            3.391292,
+            3.566394
+        ],
+        "dynamo_transform_time": [
+            5.02,
+            2.36,
+            7.3
+        ],
+        "graph_compile_general_shape": [
+            null,
+            null,
+            null
+        ],
+        "graph_compile_cached": [
+            3.787,
+            1.404,
+            6.589
+        ],
+        "torch.compile": [
+            5.02,
+            2.36,
+            7.3
+        ],
+        "kv_cache_profiling": [
+            10.29,
+            5.06,
+            16.22
+        ],
+        "graph_capturing": [
+            1.54,
+            1.41,
+            2.35
+        ],
+        "init_engine": [
+            12.28,
+            6.89,
+            19.08
+        ],
+        "tokenizer_init": [
+            0.07,
+            0.1,
+            0.1
+        ],
+        "total_time": [
+            14.471091,
+            10.381292,
+            22.746394
+        ],
+        "actual_total_time": [
+            25.15,
+            21.03,
+            33.38
+        ]
+    }
+}

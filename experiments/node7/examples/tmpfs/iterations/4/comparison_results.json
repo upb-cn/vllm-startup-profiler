@@ -1,0 +1,156 @@
+{
+    "labels": [
+        "output_model_llama2-13b-hf_default.txt",
+        "output_model_llama2-13b-hf_tmpfs.txt",
+        "output_model_llama3-3b_default.txt",
+        "output_model_llama3-3b_tmpfs.txt",
+        "output_model_qwen-7b_default.txt",
+        "output_model_qwen-7b_tmpfs.txt"
+    ],
+    "data": {
+        "detect_platform": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "llm_imports": [
+            2.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+        ],
+        "get_model_info": [
+            4.0,
+            5.0,
+            5.0,
+            5.0,
+            5.0,
+            5.0
+        ],
+        "worker_init": [
+            1.0,
+            2.0,
+            2.0,
+            2.0,
+            1.0,
+            2.0
+        ],
+        "framework_bootstrap": [
+            7.0,
+            8.0,
+            8.0,
+            8.0,
+            7.0,
+            8.0
+        ],
+        "load_weights": [
+            3.48,
+            3.57,
+            0.87,
+            0.87,
+            2.09,
+            2.1
+        ],
+        "model_init": [
+            0.13,
+            0.12,
+            0.13,
+            0.13,
+            0.12,
+            0.12
+        ],
+        "model_loading": [
+            3.608966,
+            3.701421,
+            1.001889,
+            1.008388,
+            2.204936,
+            2.223056
+        ],
+        "dynamo_transform_time": [
+            6.5,
+            6.58,
+            4.55,
+            4.72,
+            5.2,
+            5.21
+        ],
+        "graph_compile_general_shape": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "graph_compile_cached": [
+            5.496,
+            5.437,
+            3.911,
+            4.121,
+            4.276,
+            4.248
+        ],
+        "torch.compile": [
+            6.5,
+            6.58,
+            4.55,
+            4.72,
+            5.2,
+            5.21
+        ],
+        "kv_cache_profiling": [
+            2.404,
+            2.4130000000000003,
+            1.568999999999999,
+            1.568999999999999,
+            1.7240000000000002,
+            1.7319999999999993
+        ],
+        "graph_capturing": [
+            1.45,
+            1.46,
+            1.01,
+            1.02,
+            1.13,
+            1.14
+        ],
+        "init_engine": [
+            16.33,
+            16.39,
+            11.52,
+            11.89,
+            12.8,
+            12.81
+        ],
+        "tokenizer_init": [
+            0.08,
+            0.08,
+            0.28,
+            0.28,
+            0.25,
+            0.25
+        ],
+        "total_time": [
+            27.018966,
+            28.171421,
+            20.801889000000003,
+            21.178388,
+            22.254936,
+            23.283056000000002
+        ],
+        "actual_total_time": [
+            29.0,
+            29.0,
+            21.0,
+            22.0,
+            24.0,
+            24.0
+        ]
+    }
+}

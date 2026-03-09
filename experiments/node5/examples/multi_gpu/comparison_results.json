@@ -1,0 +1,74 @@
+{
+    "labels": [
+        "output_model_llama2-13b-hf.txt",
+        "output_model_llama3-3b.txt",
+        "output_model_qwen-4b.txt"
+    ],
+    "data": {
+        "load_weights": [
+            45.53,
+            0.87,
+            12.87
+        ],
+        "model_init": [
+            0.12,
+            0.12,
+            0.11
+        ],
+        "model_loading": [
+            45.651491,
+            0.995336,
+            12.992741
+        ],
+        "dynamo_transform_time": [
+            6.12,
+            4.29,
+            6.37
+        ],
+        "graph_compile_general_shape": [
+            null,
+            null,
+            null
+        ],
+        "graph_compile_cached": [
+            null,
+            null,
+            null
+        ],
+        "torch.compile": [
+            29.77,
+            23.3,
+            31.86
+        ],
+        "kv_cache_profiling": [
+            41.6,
+            32.43,
+            41.81
+        ],
+        "graph_capturing": [
+            1.74,
+            0.94,
+            1.16
+        ],
+        "init_engine": [
+            43.88,
+            33.87,
+            43.5
+        ],
+        "tokenizer_init": [
+            0.09,
+            0.28,
+            0.26
+        ],
+        "total_time": [
+            89.621491,
+            35.145336,
+            56.752741
+        ],
+        "actual_total_time": [
+            104.39,
+            49.76,
+            71.34
+        ]
+    }
+}
