@@ -3,7 +3,7 @@
 1) Clone the repo:
 ```bash
 git clone https://github.com/upb-cn/vllm-startup-profiler
-cd vllm-profiling
+cd vllm-startup-profiler
 ```
 
 2) Install dependencies:
