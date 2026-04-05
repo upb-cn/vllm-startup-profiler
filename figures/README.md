@@ -1,3 +1,11 @@
+## Requirements
+
+- Python ≤ 3.12
+- vLLM == 0.10.1.1
+- NVIDIA H100 and NVIDIA L40S GPUs
+- Any two different CPU models
+- ~600 GB available disk space
+
 ## Setup
 
 1) Clone the repo:
