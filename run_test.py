@@ -77,6 +77,10 @@ def main():
 
         if not tuned_params:
             # No arrays: run once
+            model_path = static_params.get("model")
+            if model_path and not os.path.isdir(model_path):
+                print(f"Skipping config: model path '{model_path}' does not exist or is not a directory.")
+                continue
             cmd, output_file = build_command(static_params, config_dir)
             output_files.append(output_file)
             print("Running:", cmd)
@@ -89,7 +93,12 @@ def main():
 
         for values in tuned_values:
             combination = dict(zip(tuned_keys, values))
-            cmd, output_file = build_command({**static_params, **combination}, config_dir)
+            final_params = {**static_params, **combination}
+            model_path = final_params.get("model")
+            if model_path and not os.path.isdir(model_path):
+                print(f"Skipping config: model path '{model_path}' does not exist or is not a directory.")
+                continue
+            cmd, output_file = build_command(final_params, config_dir)
             output_files.append(output_file)
             print("Running:", cmd)
             subprocess.run(cmd, shell=True, check=True)
