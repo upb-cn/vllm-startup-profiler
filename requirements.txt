@@ -25,6 +25,7 @@ contourpy==1.3.3
 cuda-bindings==13.1.1
 cuda-pathfinder==1.3.4
 cuda-python==13.1.1
+cuda-tile==1.2.0
 cupy-cuda12x==13.6.0
 cycler==0.12.1
 debugpy==1.8.20
@@ -43,6 +44,7 @@ fastapi-cloud-cli==0.11.0
 fastar==0.8.0
 fastrlock==0.8.3
 filelock==3.20.3
+flashinfer-python==0.6.7.post3
 fonttools==4.61.1
 frozenlist==1.8.0
 fsspec==2026.2.0
