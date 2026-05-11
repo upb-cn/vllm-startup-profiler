@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breaking the Ice — Analyzing Cold Start Latency in vLLM</title>
+<meta name="description" content="A summary of our MLSys 2026 paper measuring and decomposing the cold start latency of vLLM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Source+Serif+4:opsz,wght@8..60,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F2EB;
+    --bg-tint: #EDE8DC;
+    --bg-card: #FBF8F1;
+    --ink: #1B1F2A;
+    --ink-soft: #4A5060;
+    --rule: #D8D2C2;
+    --accent: #1F4E5C;
+    --accent-soft: #6E9DA8;
+    --highlight: #C26B4F;
+    --code-bg: #1B1F2A;
+    --code-ink: #E8E1D2;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 19px;
+    line-height: 1.65;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(circle at 25% 15%, rgba(31,78,92,0.04) 0, transparent 40%),
+      radial-gradient(circle at 75% 85%, rgba(194,107,79,0.04) 0, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(12px);
+    background: rgba(245,242,235,0.85);
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .nav .brand { font-weight: 500; color: var(--accent); }
+  .nav .meta { color: var(--ink-soft); }
+
+  .progress {
+    position: fixed; top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--highlight));
+    width: 0%;
+    z-index: 100;
+    transition: width 0.05s linear;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HERO */
+  .hero { padding: 90px 0 50px; border-bottom: 1px solid var(--rule); }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--highlight);
+    margin-bottom: 28px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--highlight); }
+
+  h1.title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-weight: 400;
+    font-size: clamp(38px, 5.4vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 24px;
+    color: var(--ink);
+  }
+  h1.title em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: var(--accent);
+  }
+
+  .deck {
+    font-family: 'Fraunces', Georgia, serif;
+    font-variation-settings: "opsz" 36;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0 0 44px;
+  }
+
+  /* AUTHOR BLOCK */
+  .authors-block {
+    margin-top: 44px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+  }
+  .authors-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+    opacity: 0.7;
+  }
+  .authors-list {
+    font-family: 'Fraunces', Georgia, serif;
+    font-variation-settings: "opsz" 36;
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .authors-list .sep { color: var(--rule); margin: 0 10px; font-weight: 300; }
+  .authors-list sup {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--highlight);
+    margin-left: 2px;
+    font-weight: 500;
+    vertical-align: 6px;
+  }
+  .affiliations-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .affiliations-key sup {
+    color: var(--highlight);
+    font-weight: 500;
+    margin-right: 4px;
+  }
+  .affiliations-key .sep { color: var(--rule); margin: 0 10px; }
+
+  .meta-row {
+    display: flex; flex-wrap: wrap; gap: 28px 48px;
+    margin-top: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  .meta-row strong {
+    color: var(--ink);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 10px;
+    opacity: 0.6;
+  }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    margin: 44px 0 30px;
+    padding: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+  .toc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 22px;
+    font-weight: 500;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .toc-label::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--rule);
+  }
+  .toc ol {
+    list-style: none;
+    margin: 0; padding: 0;
+    counter-reset: toc;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 36px;
+  }
+  .toc ol li {
+    counter-increment: toc;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .toc ol li a {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 12px 2px;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.35;
+    transition: all 0.18s;
+  }
+  .toc ol li a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--highlight);
+    flex-shrink: 0;
+    letter-spacing: 0.03em;
+  }
+  .toc ol li a:hover {
+    color: var(--accent);
+    padding-left: 8px;
+  }
+  .toc ol li a:hover::before { color: var(--accent); }
+
+  /* BODY */
+  article { padding: 52px 0 80px; }
+
+  article p {
+    margin: 0 0 1.4em;
+    font-size: 19px;
+    line-height: 1.7;
+  }
+
+  article p.lede::first-letter {
+    font-family: 'Fraunces', Georgia, serif;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    font-weight: 600;
+    font-size: 5.4em;
+    line-height: 0.85;
+    float: left;
+    margin: 0.06em 0.08em -0.05em 0;
+    color: var(--accent);
+  }
+
+  article h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-variation-settings: "opsz" 60, "SOFT" 50;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 64px 0 24px;
+    color: var(--ink);
+    scroll-margin-top: 70px;
+  }
+  article h2 .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--highlight);
+    margin-right: 14px;
+    vertical-align: 6px;
+    font-weight: 400;
+  }
+
+  article h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 23px;
+    margin: 44px 0 12px;
+    color: var(--accent);
+    line-height: 1.25;
+  }
+  article h3 .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-size: 12px;
+    color: var(--highlight);
+    margin-right: 12px;
+    vertical-align: 4px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  article h3 .tag {
+    display: inline-block;
+    margin-left: 12px;
+    padding: 2px 8px;
+    background: var(--bg-tint);
+    border-radius: 2px;
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    vertical-align: 4px;
+    font-weight: 500;
+  }
+  article h3 .tag.gpu { background: rgba(31,78,92,0.12); color: var(--accent); }
+
+  article a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-soft);
+    transition: all 0.2s;
+  }
+  article a:hover { background: rgba(31,78,92,0.08); border-bottom-color: var(--accent); }
+
+  article code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    background: var(--bg-tint);
+    padding: 1px 7px;
+    border-radius: 3px;
+    color: var(--accent);
+  }
+
+  article strong { font-weight: 600; color: var(--ink); }
+  article em { font-style: italic; }
+
+  /* PARAMETER NOTE */
+  .param-note {
+    margin: 14px 0 24px;
+    padding: 14px 18px;
+    background: var(--bg-tint);
+    border-left: 2px solid var(--highlight);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .param-note strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--highlight);
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  /* INLINE CITATION */
+  sup.cite {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65em;
+    margin-left: 1px;
+    vertical-align: 6px;
+  }
+  sup.cite a {
+    color: var(--highlight);
+    text-decoration: none;
+    border-bottom: none;
+    font-weight: 500;
+    padding: 0 2px;
+  }
+  sup.cite a:hover { background: rgba(194,107,79,0.15); border-radius: 2px; }
+
+  /* FIGURES (default — for top-level paper figures) */
+  figure { margin: 44px 0; padding: 0; }
+  figure .frame {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    padding: 24px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  figure img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+  }
+  figcaption {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-top: 16px;
+    text-align: center;
+    padding: 0 8px;
+  }
+  figcaption b {
+    font-style: normal;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--highlight);
+    font-weight: 500;
+    margin-right: 8px;
+  }
+
+  /* INLINE / SMALLER FIGURE — for the per-step scaling plots in Section 2 */
+  figure.inline {
+    margin: 22px 0 16px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  figure.inline .frame {
+    padding: 16px;
+    background: var(--bg-card);
+  }
+  figure.inline figcaption {
+    font-size: 14px;
+    margin-top: 12px;
+  }
+
+  /* KEY FINDING CALLOUT */
+  .finding {
+    margin: 48px -8px;
+    padding: 28px 32px;
+    background: var(--bg-card);
+    border-left: 3px solid var(--accent);
+    border-radius: 2px;
+  }
+  .finding .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .finding p {
+    margin: 0;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  /* TL;DR (at end) */
+  .tldr {
+    margin: 80px 0 0;
+    padding: 40px 40px 38px;
+    background: var(--bg-card);
+    border-left: 4px solid var(--highlight);
+    border-radius: 2px;
+    scroll-margin-top: 70px;
+  }
+  .tldr h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--highlight);
+    margin: 0 0 20px;
+    font-weight: 500;
+    font-style: normal;
+  }
+  .tldr ul { margin: 0; padding-left: 22px; }
+  .tldr li {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 17px;
+  }
+  .tldr li:last-child { margin-bottom: 0; }
+  .tldr li::marker { color: var(--accent); }
+
+  /* RECOMMENDATIONS LIST */
+  .recs {
+    margin: 32px 0 36px;
+    padding: 0;
+    list-style: none;
+  }
+  .recs li {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    line-height: 1.6;
+  }
+  .recs li:first-child { border-top: 1px solid var(--rule); }
+  .recs li strong {
+    display: block;
+    margin-bottom: 4px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  /* REFERENCES */
+  .references {
+    margin: 70px 0 0;
+    padding-top: 40px;
+    border-top: 2px solid var(--rule);
+    scroll-margin-top: 70px;
+  }
+  .references h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 28px;
+    margin: 0 0 28px;
+    color: var(--ink);
+  }
+  .references ol {
+    list-style: none;
+    counter-reset: ref;
+    margin: 0; padding: 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .references ol li {
+    counter-increment: ref;
+    padding: 12px 0 12px 48px;
+    border-bottom: 1px dotted var(--rule);
+    position: relative;
+    color: var(--ink-soft);
+    font-family: 'Source Serif 4', Georgia, serif;
+  }
+  .references ol li::before {
+    content: '[' counter(ref) ']';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--highlight);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .references ol li em {
+    color: var(--ink);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .references ol li a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-soft);
+    word-break: break-word;
+  }
+  .references ol li a:hover { background: rgba(31,78,92,0.08); }
+
+  /* FOOTER */
+  footer {
+    margin-top: 80px;
+    padding: 56px 0 60px;
+    border-top: 1px solid var(--rule);
+    background: var(--bg-tint);
+  }
+  footer .container { display: flex; flex-direction: column; gap: 24px; }
+  footer h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 26px;
+    margin: 0 0 8px;
+  }
+  footer p { margin: 0; color: var(--ink-soft); font-size: 17px; line-height: 1.6; }
+  footer .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+  footer a.btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px;
+    background: var(--ink);
+    color: var(--bg);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: 2px;
+    transition: all 0.2s;
+    border: 1px solid var(--ink);
+  }
+  footer a.btn:hover { background: var(--accent); border-color: var(--accent); }
+  footer a.btn.ghost { background: transparent; color: var(--ink); }
+  footer a.btn.ghost:hover { background: var(--ink); color: var(--bg); }
+
+  footer .colophon {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  footer .colophon span { color: var(--ink); }
+
+  @media (max-width: 800px) {
+    body { font-size: 17px; }
+    article p { font-size: 17px; }
+    .hero { padding: 56px 0 40px; }
+    .deck { font-size: 19px; }
+    article h2 { font-size: 24px; margin: 44px 0 18px; }
+    article h3 { font-size: 19px; }
+    .meta-row { gap: 18px 24px; }
+    .toc { padding: 24px; }
+    .toc ol { grid-template-columns: 1fr; gap: 0; }
+    .tldr { padding: 26px 22px; }
+    .references { padding-top: 30px; }
+    .finding { padding: 22px 24px; margin-left: 0; margin-right: 0; }
+    .param-note { padding: 12px 14px; font-size: 15px; }
+    figure.inline { max-width: 100%; }
+    figure.inline .frame { padding: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<nav class="nav">
+  <span class="brand">Breaking the Ice ❄</span>
+  <span class="meta">~15 min read · MLSys 2026</span>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">Paper Summary · MLSys 2026</div>
+    <h1 class="title">Breaking the Ice: Analyzing Cold Start Latency in <em>vLLM</em></h1>
+    <p class="deck">Serverless LLM inference depends on rapid worker startup, but the engine startup phase of vLLM has not been systematically characterized. In our MLSys&nbsp;2026 paper, we measure and decompose the cold start process and analyze where the latency comes from.</p>
+
+    <div class="authors-block">
+      <div class="authors-label">— Authors</div>
+      <div class="authors-list">
+        Huzaifa Shaaban Kabakibo<sup>1</sup><span class="sep">·</span>Animesh Trivedi<sup>2</sup><span class="sep">·</span>Lin Wang<sup>1</sup>
+      </div>
+      <div class="affiliations-key">
+        <sup>1</sup>Paderborn University<span class="sep">·</span><sup>2</sup>IBM Research
+      </div>
+
+      <div class="meta-row">
+        <div><strong>Venue</strong>MLSys 2026 · Bellevue, WA</div>
+        <div><strong>Posted by</strong>Huzaifa S. Kabakibo</div>
+        <div><strong>Reading time</strong>~15 minutes</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="toc" aria-label="Table of contents">
+    <h3 class="toc-label">↓ Sections</h3>
+    <ol>
+      <li><a href="#section-01">Startup latency variability across vLLM versions</a></li>
+      <li><a href="#section-02">A six-step decomposition of startup</a></li>
+      <li><a href="#section-03">CPU and GPU sensitivity</a></li>
+      <li><a href="#section-04">CPU core utilization during startup</a></li>
+      <li><a href="#section-05">A predictive model of startup latency</a></li>
+      <li><a href="#tldr">Summary of key findings</a></li>
+      <li><a href="#references">References</a></li>
+    </ol>
+  </nav>
+</div>
+
+<article>
+  <div class="container">
+
+    <p class="lede">vLLM<sup class="cite"><a href="#ref1">[1]</a></sup> has become a widely used open-source engine for serving large language models<sup class="cite"><a href="#ref2">[2]</a></sup>. As deployments increasingly rely on serverless and elastic-scaling architectures, the time required to bring a new vLLM worker into a serving state — its <em>cold start latency</em> — directly affects request tail latency and provisioning cost. Despite this, the engine startup phase of vLLM has not been systematically measured.</p>
+
+    <p>Without a clean characterization of where startup time goes, every release becomes opaque, and discussions of startup performance reduce to anecdote<sup class="cite"><a href="#ref3">[3]</a></sup>. In our MLSys&nbsp;2026 paper, <em>Breaking the Ice: Analyzing Cold Start Latency in vLLM</em>, we instrument vLLM end-to-end, decompose startup into well-defined phases, and identify which components dominate the latency.</p>
+
+    <p>This post summarizes the main findings of the paper for readers operating vLLM in production or building serverless inference platforms. We omit some experimental detail in favor of clarity; for the full methodology, ablations, and validation, the paper itself is the reference.</p>
+
+    <h2 id="section-01"><span class="num">01</span>Startup latency variability across vLLM versions</h2>
+
+    <p>To motivate the study, we first measured vLLM startup latency across the last nine major releases on identical hardware. We used OPT-6.7B<sup class="cite"><a href="#ref4">[4]</a></sup> as the model and an NVIDIA H100 GPU<sup class="cite"><a href="#ref5">[5]</a></sup> as the accelerator, holding all other variables constant.</p>
+
+    <figure>
+      <div class="frame">
+        <img src="images/fig1-startup-versions.png" alt="Bar chart showing vLLM startup times across versions from v0.3.1 to v0.11.0">
+      </div>
+      <figcaption><b>Figure 1</b>vLLM startup time by release version, measured with OPT-6.7B on an H100 GPU.</figcaption>
+    </figure>
+
+    <p>The measurements span an approximately 4× range. Startup time was roughly 8 seconds on v0.3, increased to 36 seconds on v0.8 and v0.9, and decreased to about 16 seconds on v0.11. The increase coincides with two major architectural changes in vLLM: the introduction of the V1 API and the integration of <code>torch.compile</code><sup class="cite"><a href="#ref6">[6]</a></sup>. Recent releases have begun to recover some of this regression, although startup latency remains substantially higher than two years ago.</p>
+
+    <p>This level of variability across releases motivates a more principled characterization. To improve startup latency systematically, we need a clear breakdown of where time is actually spent.</p>
+
+    <h2 id="section-02"><span class="num">02</span>A six-step decomposition of startup</h2>
+
+    <p>We instrumented vLLM v0.10.1.1 and decomposed the engine startup process into six functional phases. Each phase corresponds to a distinct operation that the engine must perform before it can serve requests. Figure&nbsp;2 shows a representative startup of Llama-3.2-3B<sup class="cite"><a href="#ref7">[7]</a></sup> on an H100, with each phase contributing to the total.</p>
+
+    <figure>
+      <div class="frame">
+        <img src="images/fig2-startup-breakdown.png" alt="Stacked bar chart breaking vLLM startup into six labeled phases, with hatched bars marking CPU-bound steps">
+      </div>
+      <figcaption><b>Figure 2</b>The six-phase decomposition of vLLM startup, measured with Llama-3.2-3B on an H100. Hatched bars indicate CPU-bound phases; solid bars indicate GPU-bound phases.</figcaption>
+    </figure>
+
+    <p>The decomposition is informative for two reasons. First, it identifies the operations whose cost dominates startup latency, and therefore the most productive targets for optimization. Second, each phase scales with a small set of well-defined inputs. Identifying the relevant input for a given phase makes it possible to predict that phase's latency for a new model or hardware configuration without re-running the full benchmark — a property we exploit later when we build an analytical predictor.</p>
+
+    <p>We describe each of the six phases below. For each one, we explain what it does, show the empirical relationship between the phase's latency and its dependent input, and summarize the result in a parameter callout.</p>
+
+    <h3><span class="step-num">01</span>Framework Bootstrap <span class="tag">CPU</span></h3>
+
+    <p>This phase covers everything that must happen before any model-specific work can begin: the host process starts the Python interpreter, vLLM detects the platform (CUDA version, architecture, available accelerators), imports its full dependency graph (PyTorch, Transformers, vLLM modules and registered plugins), parses the model's <code>config.json</code> to determine architecture metadata, and spawns the worker process that will own the GPU.</p>
+
+    <p>The cost is dominated by Python-level overhead. vLLM's codebase has grown to roughly 280K lines of Python in v0.10, and many of its dependencies are themselves large. Cold imports of PyTorch alone account for a non-trivial fraction of this phase.</p>
+
+    <div class="param-note">
+      <strong>Dependent parameter</strong>
+      Approximately constant per startup. The cost is essentially independent of the model and varies primarily with the host CPU's single-thread performance and with the size of the installed dependency graph.
+    </div>
+
+    <h3><span class="step-num">02</span>Tokenizer Initialization <span class="tag">CPU</span></h3>
+
+    <p>The model's tokenizer is loaded into memory: vocabulary, byte-level merge rules, special-token metadata, and any associated configuration. For most models this is a comparatively fast operation, but tokenizers vary considerably in size. A Llama-3 tokenizer with a 128K vocabulary is several times larger to load than an OPT tokenizer with a 50K vocabulary, and that difference shows up directly in this phase.</p>
+
+    <figure class="inline">
+      <div class="frame">
+        <img src="images/fig4-tokenizer-scaling.png" alt="Scatter plot of tokenizer initialization time versus tokenizer file size, showing a linear fit">
+      </div>
+      <figcaption><b>Figure 4</b>Tokenizer initialization latency as a function of tokenizer file size, across the models in our evaluation. The inset plot shows a fitted linear regression line, indicating a linear relationship. PCC stands for Pearson correlation coefficient, where a value of 1 indicates a perfect linear relationship.</figcaption>
+    </figure>
+
+    <div class="param-note">
+      <strong>Dependent parameter</strong>
+      The size of the tokenizer's serialized representation. Latency scales linearly with tokenizer file size, which in turn correlates with vocabulary size.
+    </div>
+
+    <h3><span class="step-num">03</span>Model Loading <span class="tag">CPU</span></h3>
+
+    <p>The model architecture is constructed in memory according to the parsed configuration, and the pretrained weights are read from disk and copied into GPU memory. The cost here is dominated by I/O and host-to-device memory transfers rather than by computation.</p>
+
+    <p>The relevant input is not the parameter count alone but the total size of the weight payload, which depends on the precision used. A 7B-parameter model in FP16 contributes roughly 14&nbsp;GB of weights to load; the same model in FP8 halves that, and quantized variants reduce it further.</p>
+
+    <figure class="inline">
+      <div class="frame">
+        <img src="images/fig5-model-loading-scaling.png" alt="Scatter plot of model loading latency versus total weight payload size">
+      </div>
+      <figcaption><b>Figure 5</b>Model loading latency as a function of total weight payload size (parameters × bytes per parameter). The relationship is perfectly linear.</figcaption>
+    </figure>
+
+    <div class="param-note">
+      <strong>Dependent parameter</strong>
+      Total weight size, computed as <em>parameter&nbsp;count × bytes&nbsp;per&nbsp;parameter</em>. Latency scales linearly with this product.
+    </div>
+
+    <h3><span class="step-num">04</span>Torch Compilation <span class="tag">CPU</span></h3>
+
+    <p>In the V1 vLLM architecture, the model is compiled with <code>torch.compile</code> before serving begins. The phase has two sub-components: TorchDynamo<sup class="cite"><a href="#ref8">[8]</a></sup> traces the model's Python execution into an intermediate computational graph, and TorchInductor lowers that graph into optimized CUDA kernels.</p>
+
+    <p>The cost is driven by the number of operations in the traced graph, which scales with the depth of the model (number of layers) and the complexity of each transformer block. We found that the size of the generated compiled graphs is a good proxy for the compilation cost.</p>
+
+    <figure class="inline">
+      <div class="frame">
+        <img src="images/fig6-torchdynamo-scaling.png" alt="Scatter plot of TorchDynamo transformation latency versus compiled graph size">
+      </div>
+      <figcaption><b>Figure 6</b>TorchDynamo transformation latency as a function of compiled graph size. The relationship is linear.</figcaption>
+    </figure>
+
+    <figure class="inline">
+      <div class="frame">
+        <img src="images/fig7-torchinductor-scaling.png" alt="Scatter plot of TorchInductor compilation latency versus compiled graph size">
+      </div>
+      <figcaption><b>Figure 7</b>TorchInductor compilation latency as a function of compiled graph size. The relationship is linear.</figcaption>
+    </figure>
+
+    <div class="param-note">
+      <strong>Dependent parameter</strong>
+      The size of the compiled graph, which correlates with the number of layers and the operations per block.
+    </div>
+
+    <h3><span class="step-num">05</span>KV Cache Profiling <span class="tag gpu">GPU</span></h3>
+
+    <p>This is the first phase that uses the GPU substantively. A synthetic forward pass at the maximum supported sequence length is executed, and peak GPU memory consumption is measured. The remaining GPU memory is then partitioned and allocated to the KV cache. The profiling pass is needed because the precise memory footprint of a model under load is difficult to predict statically.</p>
+
+    <p>For dense models, the cost scales linearly with parameter count. Mixture-of-experts (MoE) models deviate slightly: dynamic expert routing means that different experts are activated on different forward passes, which introduces variance in the measured peak.</p>
+
+    <figure class="inline">
+      <div class="frame">
+        <img src="images/fig8-kv-cache-scaling.png" alt="Scatter plot of KV cache profiling latency versus model parameter count">
+      </div>
+      <figcaption><b>Figure 8</b>KV cache profiling latency as a function of model parameter count. Dense models follow a linear trend; MoE models (last 2 models) exhibit additional variance from dynamic expert routing.</figcaption>
+    </figure>
+
+    <div class="param-note">
+      <strong>Dependent parameter</strong>
+      Model parameter count. For MoE models, the variance from dynamic expert routing introduces a small additional term.
+    </div>
+
+    <h3><span class="step-num">06</span>CUDA Graph Capturing <span class="tag gpu">GPU</span></h3>
+
+    <p>For each batch size in vLLM's configured set, the inference kernel sequence is recorded into a reusable CUDA graph<sup class="cite"><a href="#ref9">[9]</a></sup>. At inference time, replaying these graphs eliminates per-step kernel-launch overhead, which is a meaningful contribution to latency for small models and batch sizes.</p>
+
+    <p>The cost compounds along two axes: each capture executes a forward pass through the full model (so larger models cost more per capture), and one capture is performed per batch size in the set (so more batch sizes cost more in total). vLLM's default configuration captures graphs across a wide range of batch sizes; in deployments where only a subset is actually used at runtime, trimming the set is a straightforward way to reduce capture time.</p>
+
+    <figure class="inline">
+      <div class="frame">
+        <img src="images/fig9-cuda-graph-scaling.png" alt="Scatter plot of CUDA graph capture latency versus model size and number of captured batch sizes">
+      </div>
+      <figcaption><b>Figure 9</b>CUDA graph capture latency as a function of model size. The relationship is linear.</figcaption>
+    </figure>
+
+    <figure class="inline">
+      <div class="frame">
+        <img src="images/fig10-cuda-graph-scaling2.png" alt="Scatter plot of CUDA graph capture latency versus number of captured batch sizes">
+      </div>
+      <figcaption><b>Figure 10</b>CUDA graph capture latency as a function of the number of captured batch sizes. The relationship is linear.</figcaption>
+    </figure>
+
+    <div class="param-note">
+      <strong>Dependent parameters</strong>
+      Model size <em>and</em> the number of captured batch sizes. The two factors compound: doubling the batch-size set roughly doubles the capture time.
+    </div>
+
+    <p>Across the models in our evaluation, the per-phase relationships shown in Figures&nbsp;3-10 all exhibit clean linear behavior, with Pearson correlation coefficients between 0.92 and 1.00. This indicates that startup behavior is the sum of well-behaved, predictable components rather than an opaque process — a property we exploit later when we build an analytical predictor.</p>
+
+    <p>Of the six phases, four execute primarily on the CPU. The remaining two — KV cache profiling and CUDA graph capturing — run on the GPU but account for a minority of the total startup time on the models we tested. This breakdown sets up the central empirical question of the paper: if four of the six phases are CPU-bound, how does the choice of host CPU compare with the choice of GPU in determining startup latency?</p>
+
+    <h2 id="section-03"><span class="num">03</span>CPU and GPU sensitivity</h2>
+
+    <p>The phase decomposition suggests that startup latency should be more sensitive to CPU choice than to GPU choice. To test this empirically, we performed two controlled experiments.</p>
+
+    <p>In the first, we held the CPU constant and replaced the H100 GPU with an L40S<sup class="cite"><a href="#ref10">[10]</a></sup>. The H100 has approximately twice the throughput of the L40S on most workloads, so a naïve expectation is that startup should be noticeably faster on the H100.</p>
+
+    <figure>
+      <div class="frame">
+        <img src="images/fig10-gpu-comparison.png" alt="Bar chart comparing each startup phase on H100 vs L40S, normalized to the H100 baseline">
+      </div>
+      <figcaption><b>Figure 11</b>Per-phase startup latency on H100 versus L40S, normalized to the H100 baseline. Values close to 1.0 indicate comparable performance.</figcaption>
+    </figure>
+
+    <p>The data show otherwise. Most phases run within a few percent of each other on the two GPUs. CUDA graph capture — the only phase dominated by forward-pass execution — exhibits a 1.2× advantage on the H100. The total startup time differs by less than one percent across the two configurations.</p>
+
+    <p>In the second experiment, we held the GPU constant (H100) and replaced the CPU. We compared a node with an AMD EPYC 9354 against a node with an Intel Xeon Platinum 8568Y+.</p>
+
+    <figure>
+      <div class="frame">
+        <img src="images/fig11-cpu-comparison.png" alt="Bar chart comparing AMD EPYC vs Intel Xeon CPUs across the same vLLM startup phases">
+      </div>
+      <figcaption><b>Figure 12</b>Per-phase startup latency on AMD EPYC 9354 versus Intel Xeon Platinum 8568Y+, normalized to the AMD baseline. Both nodes use H100 GPUs.</figcaption>
+    </figure>
+
+    <p>The differences across CPUs are substantially larger and not uniform in direction. Tokenizer initialization is 2.6× slower on the Intel system, while Dynamo transformation is faster. The result is not that one CPU outperforms the other in general; rather, it is that startup latency is genuinely sensitive to CPU choice, in clear contrast to its near-insensitivity to GPU choice.</p>
+
+    <div class="finding">
+      <div class="label">Key finding</div>
+      <p>CPU choice, rather than GPU choice, is the primary hardware determinant of vLLM cold-start latency. Despite roughly 2× the theoretical throughput of the L40S, the H100 yields essentially no improvement in total startup time. CPU substitutions, by contrast, can shift individual phases by a factor of two or more.</p>
+    </div>
+
+    <h2 id="section-04"><span class="num">04</span>CPU core utilization during startup</h2>
+
+    <p>Given that startup is CPU-dominated, a natural follow-up question is whether the work is parallelized across the available cores. To answer this, we sampled per-core CPU utilization at 100&nbsp;ms intervals throughout the full startup process.</p>
+
+    <figure>
+      <div class="frame">
+        <img src="images/fig12-core-utilization.png" alt="Heatmap of per-core CPU utilization during vLLM startup">
+      </div>
+      <figcaption><b>Figure 13</b>Per-core CPU utilization during vLLM startup, sampled every 100&nbsp;ms. At each point in time, one core is typically fully utilized while the rest remain largely idle.</figcaption>
+    </figure>
+
+    <p>The pattern is consistent across runs: at any given moment, exactly one core is fully utilized, and concurrent saturation of two or more cores is uncommon. The startup process is therefore largely a sequence of single-threaded Python operations — module imports, dependency resolution, graph tracing, and file I/O — that the implementation has not yet parallelized.</p>
+
+    <h2 id="section-05"><span class="num">05</span>A predictive model of startup latency</h2>
+
+    <p>Because each phase scales linearly with one or two well-defined inputs (parameter count, tokenizer size, compiled graph size, or batch-size set), the startup process admits a simple analytical model. We fit one linear regression per phase, parameterized by that phase's natural inputs, and sum the per-phase predictions to estimate total startup time.</p>
+
+    <p>We validated the resulting model on five models held out from the training set: Falcon-11B, Mistral-7B, Gemma-7B, Llama-3-3B, and Qwen-7B. The mean squared error across the held-out set is 2.42 seconds, and the largest single prediction error is 2.08 seconds. We additionally evaluated the model on vLLM v0.11, which was released after our main experiments; the MSE on v0.11 is 2.62 seconds. This indicates that the parameterization remains valid across releases, and that updating the predictor for a new release reduces to refitting the per-phase coefficients rather than redesigning the model.</p>
+
+    <figure>
+      <div class="frame">
+        <img src="images/fig14-predictor-validation.png" alt="Bar chart comparing predicted startup time to observed startup time for the held-out models, showing a close match between the two">
+      </div>
+      <figcaption><b>Figure 14</b>Validation of the predictive model on held-out models.</figcaption>
+    </figure>
+
+    <p>This level of accuracy is sufficient for autoscaler decision-making in serverless deployments, where startup-time estimates inform pre-warming, scale-out, and de-provisioning policies. Because the predictor is decomposed by phase and white-box in form, it is also useful diagnostically: deviations between predicted and observed phase latencies localize the cause of regressions to specific components of the engine.</p>
+
+    <!-- TL;DR moved to end -->
+    <aside class="tldr" id="tldr">
+      <h3>↓ Summary of key findings</h3>
+      <ul>
+        <li>vLLM startup latency on <strong>OPT-6.7B</strong> has varied by approximately 4× across recent releases — from ~8&nbsp;seconds on v0.3 to ~36&nbsp;seconds on v0.9, with v0.11 currently at ~16&nbsp;seconds.</li>
+        <li>Engine startup decomposes into <strong>six functional phases</strong>; only two of these (KV cache profiling and CUDA graph capture) are GPU-bound.</li>
+        <li>Each phase scales linearly with a small number of well-defined inputs (model size, tokenizer size, compiled graph size, batch-size set), with Pearson coefficients between 0.92 and 1.00.</li>
+        <li>Cold-start latency is sensitive to <strong>CPU choice</strong> but largely insensitive to GPU choice. The H100 and L40S yield comparable total startup times.</li>
+        <li>During startup, a <strong>single CPU core</strong> is typically fully utilized while others remain idle, indicating substantial opportunity for parallelization.</li>
+        <li>A linear regression model parameterized by per-phase inputs predicts startup latency to within <strong>~2.4&nbsp;seconds (MSE)</strong>, sufficient for autoscaler use in serverless deployments.</li>
+      </ul>
+    </aside>
+
+    <!-- REFERENCES -->
+    <section class="references" id="references">
+      <h2>References</h2>
+      <ol>
+        <li id="ref1">Kwon, W., Li, Z., Zhuang, S., et al. <em>Efficient Memory Management for Large Language Model Serving with PagedAttention.</em> SOSP 2023.</li>
+        <li id="ref2">Nar, F. E., Pereira, G., Tang, Y., Shaw, R., Asthana, A. <em>Why vLLM is the best choice for AI inference today.</em> Red Hat Developers Blog, 2025. <a href="https://developers.redhat.com/articles/2025/10/30/why-vllm-best-choice-ai-inference-today" target="_blank" rel="noopener">developers.redhat.com</a></li>
+        <li id="ref3">vLLM Project. <em>Improve startup time UX in vLLM.</em> GitHub Issue #19824, 2025. <a href="https://github.com/vllm-project/vllm/issues/19824" target="_blank" rel="noopener">github.com/vllm-project/vllm/issues/19824</a></li>
+        <li id="ref4">Zhang, S., Roller, S., Goyal, N., et al. <em>OPT: Open Pre-trained Transformer Language Models.</em> arXiv:2205.01068, 2022. <a href="https://arxiv.org/abs/2205.01068" target="_blank" rel="noopener">arxiv.org/abs/2205.01068</a></li>
+        <li id="ref5">NVIDIA. <em>NVIDIA H100 Tensor Core GPU.</em> <a href="https://www.nvidia.com/en-us/data-center/h100/" target="_blank" rel="noopener">nvidia.com/data-center/h100</a></li>
+        <li id="ref6">vLLM Project. <em>vLLM V1: A Major Upgrade to vLLM's Core Architecture.</em> 2025. <a href="https://blog.vllm.ai/2025/01/27/v1-alpha-release.html" target="_blank" rel="noopener">blog.vllm.ai/2025/01/27/v1-alpha-release.html</a></li>
+        <li id="ref7">Meta AI. <em>LLaMA 3.2 — 3B Model.</em> Hugging Face, 2024. <a href="https://huggingface.co/meta-llama/Llama-3.2-3B" target="_blank" rel="noopener">huggingface.co/meta-llama/Llama-3.2-3B</a></li>
+        <li id="ref8">Ansel, J., Yang, E., He, H., et al. <em>PyTorch 2: Faster Machine Learning Through Dynamic Python Bytecode Transformation and Graph Compilation.</em> ASPLOS 2024.</li>
+        <li id="ref9">Gray, A. <em>Getting Started with CUDA Graphs.</em> NVIDIA Developer Blog, 2019. <a href="https://developer.nvidia.com/blog/cuda-graphs/" target="_blank" rel="noopener">developer.nvidia.com/blog/cuda-graphs</a></li>
+        <li id="ref10">NVIDIA. <em>NVIDIA L40S GPU.</em> <a href="https://www.nvidia.com/en-us/data-center/l40s/" target="_blank" rel="noopener">nvidia.com/data-center/l40s</a></li>
+        <li id="ref11">NVIDIA. <em>NVIDIA Dynamo Platform.</em> <a href="https://developer.nvidia.com/dynamo" target="_blank" rel="noopener">developer.nvidia.com/dynamo</a></li>
+        <li id="ref12">Red Hat. <em>LLM-D: Distributed Large Language Model Deployment Framework.</em> <a href="https://llm-d.ai/" target="_blank" rel="noopener">llm-d.ai</a></li>
+        <li id="ref13">AIBrix. <em>Cost-efficient and Pluggable Infrastructure Components for GenAI Inference.</em> <a href="https://github.com/vllm-project/aibrix" target="_blank" rel="noopener">github.com/vllm-project/aibrix</a></li>
+        <li id="ref14">vLLM Production Stack. <em>Reference Stack for Production vLLM Deployment.</em> <a href="https://github.com/vllm-project/production-stack" target="_blank" rel="noopener">github.com/vllm-project/production-stack</a></li>
+        <li id="ref15">NVIDIA. <em>Pre-Deployment Profiling — NVIDIA Dynamo Documentation.</em> <a href="https://docs.nvidia.com/dynamo/latest/benchmarks/pre_deployment_profiling.html" target="_blank" rel="noopener">docs.nvidia.com/dynamo/.../pre_deployment_profiling.html</a></li>
+      </ol>
+    </section>
+
+  </div>
+</article>
+
+<footer>
+  <div class="container">
+    <h4>Reproducibility artifact</h4>
+    <p>The benchmarking suite, analysis tools, and predictive model are open-source. The artifact reproduces the figures in the paper given the appropriate hardware configuration.</p>
+    <div class="links">
+      <a class="btn" href="https://github.com/upb-cn/vllm-startup-profiler" target="_blank" rel="noopener">↗ GitHub Repo</a>
+      <a class="btn ghost" href="https://mlsys.org/virtual/2026/poster/3561" target="_blank" rel="noopener">↗ MLSys 2026 Full Paper</a>
+    </div>
+    <div class="colophon">
+      <span>Paper</span> · "Breaking the Ice: Analyzing Cold Start Latency in vLLM" — Huzaifa Shaaban Kabakibo, Animesh Trivedi, Lin Wang &nbsp;·&nbsp; <span>Conference</span> · MLSys 2026 · Bellevue, WA &nbsp;·&nbsp; <span>Blog</span> · Written by Huzaifa S. Kabakibo
+    </div>
+  </div>
+</footer>
+
+<script>
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const h = document.documentElement;
+    const scrolled = h.scrollTop;
+    const max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (scrolled / max * 100) + '%';
+  }
+  document.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+
+</body>
+</html>
